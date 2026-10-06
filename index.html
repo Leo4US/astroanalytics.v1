@@ -3,21 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bússola Pessoal • O Código Secreto do Seu Destino</title>
+  <title>Bússola Pessoal • O Centro de Comando do Seu Destino</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
             cosmic: {
-              bg: '#080511',
-              card: '#120a24',
-              accent: '#ec4899',
-              gold: '#f59e0b',
-              purple: '#a855f7',
-              border: '#2a1745'
+              bg: '#0c071e',
+              card: '#180f38',
+              accent: '#f43f5e',
+              gold: '#fbbf24',
+              purple: '#c084fc',
+              cyan: '#38bdf8',
+              border: '#3b2572'
             }
           },
           fontFamily: {
@@ -29,252 +30,265 @@
     }
   </script>
   <style>
-    .bg-grid-pattern {
-      background-image: radial-gradient(rgba(236, 72, 153, 0.15) 1px, transparent 1px);
-      background-size: 28px 28px;
+    .bg-star-glow {
+      background-image: 
+        radial-gradient(circle at 50% 20%, rgba(251, 191, 36, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 80% 60%, rgba(192, 132, 252, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(244, 63, 94, 0.15) 0%, transparent 40%);
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.03); }
+    }
+    .pulse-glow {
+      animation: pulseGlow 6s ease-in-out infinite;
     }
     @keyframes orbit {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
     .orbit-slow {
-      animation: orbit 50s linear infinite;
+      animation: orbit 45s linear infinite;
     }
-    .text-glow {
-      text-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+    .text-gold-glow {
+      text-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+    }
+    .text-pink-glow {
+      text-shadow: 0 0 20px rgba(244, 63, 94, 0.7);
     }
   </style>
 </head>
-<body class="bg-cosmic-bg text-gray-200 font-sans antialiased selection:bg-cosmic-accent selection:text-white min-h-screen flex flex-col justify-between">
+<body class="bg-cosmic-bg text-gray-100 font-sans antialiased bg-star-glow selection:bg-cosmic-gold selection:text-cosmic-bg min-h-screen flex flex-col justify-between">
 
-  <!-- CABEÇALHO COM AR DE SEGREDO -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-cosmic-bg/85 border-b border-cosmic-border px-4 py-3">
+  <!-- CABEÇALHO LUMINOSO -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-cosmic-bg/80 border-b border-cosmic-border/60 px-4 py-3.5">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-cosmic-accent via-cosmic-purple to-cosmic-gold flex items-center justify-center font-serif font-bold text-white shadow-lg shadow-cosmic-accent/30">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cosmic-gold via-cosmic-accent to-cosmic-purple flex items-center justify-center font-serif font-bold text-cosmic-bg shadow-lg shadow-cosmic-gold/30">
           ✦
         </div>
         <div>
-          <h1 class="font-serif font-bold text-base leading-none tracking-wider text-white">BÚSSOLA PRIVADA</h1>
-          <p class="text-[9px] text-cosmic-gold tracking-widest font-mono uppercase">O Código Não Revelado</p>
+          <h1 class="font-serif font-extrabold text-base leading-none tracking-widest text-white">BÚSSOLA PESSOAL</h1>
+          <p class="text-[9px] text-cosmic-gold tracking-widest font-mono font-bold uppercase mt-0.5">Centro de Comando & Conquista</p>
         </div>
       </div>
       
       <div class="flex items-center gap-2">
-        <span class="px-3 py-1 rounded-full bg-cosmic-purple/20 border border-cosmic-purple/50 text-[10px] text-cosmic-gold font-mono tracking-wider">
-          🔒 CONSULTA 100% CONFIDENCIAL
+        <span class="px-3.5 py-1 rounded-full bg-gradient-to-r from-cosmic-gold/20 to-cosmic-purple/20 border border-cosmic-gold/40 text-[10px] font-bold text-cosmic-gold font-mono tracking-wider shadow-sm">
+          ✨ AMBIENTE SEGURO & PRIVADO
         </span>
       </div>
     </div>
   </header>
 
-  <!-- MÓDULO PRINCIPAL DE CONVERSÃO E DESEJO -->
-  <main class="max-w-6xl mx-auto px-4 py-8 bg-grid-pattern flex-grow w-full">
+  <!-- MÓDULO PRINCIPAL DE EMPODERAMENTO E CONQUISTA -->
+  <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
     
-    <!-- BANNER DE ENTRADA NARRATIVO -->
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <span class="px-3 py-1 rounded-full bg-cosmic-accent/10 border border-cosmic-accent/30 text-cosmic-accent text-xs font-semibold uppercase tracking-widest inline-block mb-3">
-        Seu Refúgio de Transformação Pessoal
+    <!-- HERO NARRATIVO: DESEJO, CLAREZA E EXPANSÃO -->
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <span class="px-4 py-1.5 rounded-full bg-cosmic-gold/15 border border-cosmic-gold/40 text-cosmic-gold text-xs font-bold uppercase tracking-widest inline-block mb-4 shadow-sm">
+        Sua Rampa de Lançamento Pessoal
       </span>
-      <h2 class="font-serif text-3xl md:text-5xl font-bold text-white leading-tight text-glow">
-        E se você pudesse prever as intenções de quem se aproxima?
+      <h2 class="font-serif text-3xl md:text-5xl font-black text-white leading-tight text-pink-glow">
+        Tome o controle do seu destino e conquiste a vida que você merece.
       </h2>
-      <p class="text-sm md:text-base text-gray-300 mt-4 leading-relaxed font-light">
-        A maioria das pessoas vive tentando adivinhar o futuro. Aqui você decodifica o seu magnetismom, descobre o momento certo para mudar de vida, atrair o amor verdadeiro e conquistar sua liberdade financeira.
+      <p class="text-sm md:text-base text-gray-200 mt-5 leading-relaxed font-normal">
+        Você não nasceu para viver na dúvida ou aceitar menos do que deseja. Descubra como transitar entre as pessoas com magnetismo, destravar sua prosperidade e viver o amor com clareza e autonomia.
       </p>
     </div>
 
     <div class="grid md:grid-cols-12 gap-8 items-start">
       
-      <!-- PAINEL DE ENTRADA: O RITUAL DE DESCOBERTA -->
+      <!-- PAINEL DE COMANDO: ENTRADA DE DADOS -->
       <div class="md:col-span-5 space-y-6">
-        <div class="p-6 rounded-3xl bg-cosmic-card border border-cosmic-border shadow-2xl relative overflow-hidden">
-          <div class="absolute -top-12 -right-12 w-32 h-32 bg-cosmic-accent/10 rounded-full blur-2xl"></div>
+        <div class="p-7 rounded-3xl bg-cosmic-card/90 border border-cosmic-border/80 shadow-2xl backdrop-blur-md relative overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-36 h-36 bg-cosmic-gold/20 rounded-full blur-3xl"></div>
           
           <h3 class="font-serif font-bold text-xl text-white mb-1 flex items-center justify-between">
-            <span>Seu Mapeamento Privado</span>
-            <span class="text-xs text-cosmic-gold font-mono">✦ EXCLUSIVO</span>
+            <span>Ativar Seu Mapeamento</span>
+            <span class="text-xs text-cosmic-gold font-mono font-bold">PASSO 1</span>
           </h3>
-          <p class="text-xs text-gray-400 mb-5">Insira seus dados para revelar suas coordenadas magnéticas e seus próximos passos.</p>
+          <p class="text-xs text-gray-300 mb-6">Insira suas coordenadas para calibrar sua bússola de expansão.</p>
           
-          <form id="astro-form" onsubmit="event.preventDefault(); revealDestiny();" class="space-y-4">
+          <form id="astro-form" onsubmit="event.preventDefault(); activateCommand();" class="space-y-4.5">
             <div>
-              <label class="block text-xs text-gray-300 mb-1 font-medium">Como quer ser chamado(a)?</label>
-              <input type="text" placeholder="Seu nome ou código privado" value="Consulente Reservado" class="w-full bg-cosmic-bg border border-cosmic-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cosmic-accent transition-all">
+              <label class="block text-xs text-gray-300 mb-1.5 font-semibold">Como deseja ser identificado(a)?</label>
+              <input type="text" placeholder="Seu nome ou código" value="Consulente Pessoal" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cosmic-gold transition-all">
             </div>
 
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block text-xs text-gray-300 mb-1 font-medium">Data de Nascimento</label>
-                <input type="date" value="1998-05-18" class="w-full bg-cosmic-bg border border-cosmic-border rounded-xl px-3 py-3 text-sm text-white focus:outline-none focus:border-cosmic-accent transition-all">
+                <label class="block text-xs text-gray-300 mb-1.5 font-semibold">Data de Nascimento</label>
+                <input type="date" value="1998-05-18" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-3 py-3 text-sm text-white focus:outline-none focus:border-cosmic-gold transition-all">
               </div>
               <div>
-                <label class="block text-xs text-gray-300 mb-1 font-medium">Hora Exata</label>
-                <input type="time" value="21:15" class="w-full bg-cosmic-bg border border-cosmic-border rounded-xl px-3 py-3 text-sm text-white focus:outline-none focus:border-cosmic-accent transition-all">
+                <label class="block text-xs text-gray-300 mb-1.5 font-semibold">Hora Exata</label>
+                <input type="time" value="21:15" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-3 py-3 text-sm text-white focus:outline-none focus:border-cosmic-gold transition-all">
               </div>
             </div>
 
             <div>
-              <label class="block text-xs text-gray-300 mb-1 font-medium">Onde você nasceu?</label>
-              <input type="text" placeholder="Cidade e Estado" value="São Paulo, SP" class="w-full bg-cosmic-bg border border-cosmic-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cosmic-accent transition-all">
+              <label class="block text-xs text-gray-300 mb-1.5 font-semibold">Cidade de Nascimento</label>
+              <input type="text" placeholder="Cidade e Estado" value="São Paulo, SP" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cosmic-gold transition-all">
             </div>
 
-            <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-cosmic-accent via-cosmic-purple to-cosmic-gold text-white font-bold text-sm shadow-xl shadow-cosmic-accent/25 hover:scale-[1.01] transition-all">
-              Revelar Meu Código Secreto
+            <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-cosmic-gold via-cosmic-accent to-cosmic-purple text-cosmic-bg font-extrabold text-sm shadow-xl shadow-cosmic-gold/20 hover:scale-[1.02] transition-all">
+              Calibrar Bússola de Conquista
             </button>
           </form>
         </div>
 
-        <!-- RECURSO SEDUTOR: ANÁLISE DE COMPATIBILIDADE E AMOR -->
-        <div class="p-6 rounded-3xl bg-cosmic-card border border-cosmic-border relative">
-          <span class="text-[10px] font-bold tracking-widest text-cosmic-accent uppercase block mb-1">Decodificador de Relações</span>
-          <h3 class="font-serif font-bold text-lg text-white mb-2">Ele(a) é o amor da sua vida ou só uma ilusão?</h3>
-          <p class="text-xs text-gray-400 mb-4">Descubra a combinação magnética entre vocês e entenda o que esperar dessa história sob total sigilo.</p>
+        <!-- RECURSO DÍNAMO: NAVEGAÇÃO SOCIAL & RELAÇÕES DE PODER -->
+        <div class="p-7 rounded-3xl bg-cosmic-card/90 border border-cosmic-border/80 shadow-xl relative">
+          <span class="text-[10px] font-extrabold tracking-widest text-cosmic-gold uppercase block mb-1">Clarividência Social & Afetiva</span>
+          <h3 class="font-serif font-bold text-lg text-white mb-2">Mapeador de Convivência & Magnetismo</h3>
+          <p class="text-xs text-gray-300 mb-5 leading-relaxed">Descubra como se posicionar com presença marcante e entender o alinhamento real entre você e qualquer pessoa.</p>
           
-          <div class="space-y-3">
-            <input type="text" placeholder="Nome da pessoa em mente" class="w-full bg-cosmic-bg border border-cosmic-border rounded-xl px-4 py-2.5 text-sm text-white">
-            <input type="date" class="w-full bg-cosmic-bg border border-cosmic-border rounded-xl px-4 py-2.5 text-sm text-white">
-            <button onclick="runLoveMatch()" class="w-full py-3 rounded-xl border border-cosmic-gold text-cosmic-gold font-bold text-xs hover:bg-cosmic-gold/10 transition-all">
-              Revelar Afinidade e Intenções
+          <div class="space-y-3.5">
+            <input type="text" placeholder="Nome da pessoa" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-4 py-3 text-sm text-white">
+            <input type="date" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-4 py-3 text-sm text-white">
+            <button onclick="runSocialMapping()" class="w-full py-3.5 rounded-2xl border-2 border-cosmic-gold text-cosmic-gold font-extrabold text-xs hover:bg-cosmic-gold/15 transition-all">
+              Mapear Dinâmica do Relacionamento
             </button>
           </div>
         </div>
       </div>
 
-      <!-- PAINEL VISUAL DA MANDALA E BÚSSOLA DE REVELAÇÃO -->
+      <!-- PAINEL VISUAL DA MANDALA LUMINOSA -->
       <div class="md:col-span-7 space-y-6">
         
-        <!-- MANDALA HIPNÓTICA -->
-        <div class="p-6 rounded-3xl bg-cosmic-card border border-cosmic-border flex flex-col items-center justify-center relative min-h-[380px] shadow-2xl">
-          <div class="absolute top-4 right-4 text-[9px] text-cosmic-gold font-mono tracking-widest">MAPEMAENTO EM TEMPO REAL</div>
+        <!-- MANDALA HIPNÓTICA & BRILHANTE -->
+        <div class="p-7 rounded-3xl bg-cosmic-card/90 border border-cosmic-border/80 flex flex-col items-center justify-center relative min-h-[400px] shadow-2xl backdrop-blur-md">
+          <div class="absolute top-4 right-4 text-[9px] text-cosmic-gold font-mono tracking-widest font-bold">ALINHAMENTO EM TEMPO REAL</div>
           
-          <div class="relative w-72 h-72 my-4">
+          <div class="relative w-80 h-80 my-2 pulse-glow">
             <svg class="w-full h-full orbit-slow" viewBox="0 0 200 200">
-              <circle cx="100" cy="100" r="95" fill="none" stroke="#2a1745" stroke-width="2" />
-              <circle cx="100" cy="100" r="75" fill="none" stroke="#a855f7" stroke-width="1" stroke-dasharray="4 4" />
-              <circle cx="100" cy="100" r="50" fill="none" stroke="#f59e0b" stroke-width="1" />
+              <circle cx="100" cy="100" r="95" fill="none" stroke="#3b2572" stroke-width="2" />
+              <circle cx="100" cy="100" r="75" fill="none" stroke="#c084fc" stroke-width="1.5" stroke-dasharray="4 4" />
+              <circle cx="100" cy="100" r="50" fill="none" stroke="#fbbf24" stroke-width="1.5" />
               
-              <line x1="10" y1="100" x2="190" y2="100" stroke="#2a1745" stroke-width="1.5" />
-              <line x1="100" y1="10" x2="100" y2="190" stroke="#2a1745" stroke-width="1.5" />
-              <line x1="36" y1="36" x2="164" y2="164" stroke="#2a1745" stroke-width="1" />
-              <line x1="164" y1="36" x2="36" y2="164" stroke="#2a1745" stroke-width="1" />
+              <line x1="10" y1="100" x2="190" y2="100" stroke="#3b2572" stroke-width="1.5" />
+              <line x1="100" y1="10" x2="100" y2="190" stroke="#3b2572" stroke-width="1.5" />
+              <line x1="36" y1="36" x2="164" y2="164" stroke="#3b2572" stroke-width="1" />
+              <line x1="164" y1="36" x2="36" y2="164" stroke="#3b2572" stroke-width="1" />
 
-              <circle cx="100" cy="25" r="6" fill="#ec4899" />
-              <circle cx="160" cy="70" r="5" fill="#f59e0b" />
-              <circle cx="140" cy="150" r="7" fill="#a855f7" />
-              <circle cx="50" cy="130" r="5" fill="#3b82f6" />
+              <!-- PLANETAS LUMINOSOS -->
+              <circle cx="100" cy="25" r="7" fill="#f43f5e" />
+              <circle cx="160" cy="70" r="6" fill="#fbbf24" />
+              <circle cx="140" cy="150" r="8" fill="#c084fc" />
+              <circle cx="50" cy="130" r="6" fill="#38bdf8" />
             </svg>
 
             <div class="absolute inset-0 flex items-center justify-center">
-              <div class="text-center bg-cosmic-bg/95 p-4 rounded-full border border-cosmic-gold/60 shadow-xl">
-                <span class="block font-serif text-xs font-bold text-cosmic-gold">SOL EM</span>
-                <span class="block text-xs font-bold text-white tracking-widest">TOURO</span>
+              <div class="text-center bg-cosmic-bg/95 p-4 rounded-full border-2 border-cosmic-gold shadow-2xl">
+                <span class="block font-serif text-[10px] font-bold text-cosmic-gold">SOL EM</span>
+                <span class="block text-sm font-extrabold text-white tracking-widest text-gold-glow">TOURO</span>
               </div>
             </div>
           </div>
 
-          <div class="w-full grid grid-cols-3 gap-2 text-center text-xs mt-2">
-            <div class="p-3 rounded-2xl bg-cosmic-bg/60 border border-cosmic-border">
-              <span class="block text-gray-400 text-[9px] font-mono">SEU CHARME</span>
+          <div class="w-full grid grid-cols-3 gap-3 text-center text-xs mt-2">
+            <div class="p-3 rounded-2xl bg-cosmic-bg/70 border border-cosmic-border">
+              <span class="block text-gray-400 text-[9px] font-mono font-semibold">SEU CHARME</span>
               <span class="font-bold text-cosmic-accent">Vênus em Gêmeos</span>
             </div>
-            <div class="p-3 rounded-2xl bg-cosmic-bg/60 border border-cosmic-border">
-              <span class="block text-gray-400 text-[9px] font-mono">SEU PODER</span>
+            <div class="p-3 rounded-2xl bg-cosmic-bg/70 border border-cosmic-border">
+              <span class="block text-gray-400 text-[9px] font-mono font-semibold">SUA PRESENÇA</span>
               <span class="font-bold text-cosmic-purple">Escorpião</span>
             </div>
-            <div class="p-3 rounded-2xl bg-cosmic-bg/60 border border-cosmic-border">
-              <span class="block text-gray-400 text-[9px] font-mono">SUA VIRADA</span>
+            <div class="p-3 rounded-2xl bg-cosmic-bg/70 border border-cosmic-border">
+              <span class="block text-gray-400 text-[9px] font-mono font-semibold">SUA EXPANSÃO</span>
               <span class="font-bold text-cosmic-gold">Casa 10 em Leão</span>
             </div>
           </div>
         </div>
 
-        <!-- EXPLORAÇÃO AUTÔNOMA SEDUTORA DAS 12 CHAVES DO DESTINO -->
-        <div class="p-6 rounded-3xl bg-cosmic-card border border-cosmic-border">
+        <!-- GUIA DE AUTONOMIA: OS 12 PORTAIS DE CONQUISTA -->
+        <div class="p-7 rounded-3xl bg-cosmic-card/90 border border-cosmic-border/80">
           <div class="flex items-center justify-between mb-4">
             <div>
-              <h3 class="font-serif font-bold text-lg text-white">Sua Jornada de Revelação</h3>
-              <p class="text-xs text-gray-400">Toque nos portais abaixo para descobrir os segredos de cada área da sua vida.</p>
+              <h3 class="font-serif font-bold text-lg text-white">Sua Jornada de Autonomia & Expansão</h3>
+              <p class="text-xs text-gray-300">Toque nos setores abaixo para acessar a orientação prática de cada área.</p>
             </div>
-            <span class="px-2.5 py-1 rounded-full bg-cosmic-accent/20 text-cosmic-accent text-[10px] font-mono font-bold">12 PORTAIS</span>
+            <span class="px-3 py-1 rounded-full bg-cosmic-gold/20 text-cosmic-gold text-[10px] font-mono font-bold border border-cosmic-gold/30">12 PORTAIS</span>
           </div>
 
-          <!-- LISTA SEDUTORA DAS CASAS -->
+          <!-- BOTOES LUMINOSOS DOS PORTAIS -->
           <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5 max-h-60 overflow-y-auto pr-1">
-            <button onclick="showHouseStory(1)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 1</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">Seu Magnetismo Pessoal</span>
+            <button onclick="showPortalGuide(1)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 1</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Sua Presença & Impacto</span>
             </button>
-            <button onclick="showHouseStory(2)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 2</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">Sua Liberdade Financeira</span>
+            <button onclick="showPortalGuide(2)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 2</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Prosperidade & Riqueza</span>
             </button>
-            <button onclick="showHouseStory(3)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 3</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">O Poder da Sua Fama</span>
+            <button onclick="showPortalGuide(3)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 3</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Poder de Persuasão</span>
             </button>
-            <button onclick="showHouseStory(4)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 4</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">Seu Refúgio Secreto</span>
+            <button onclick="showPortalGuide(4)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 4</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Base de Poder Familiar</span>
             </button>
-            <button onclick="showHouseStory(5)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 5</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">Paixão e Criação</span>
+            <button onclick="showPortalGuide(5)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 5</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Paixão & Autoria</span>
             </button>
-            <button onclick="showHouseStory(6)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 6</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">Sua Energia Diária</span>
+            <button onclick="showPortalGuide(6)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 6</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Alta Performance</span>
             </button>
-            <button onclick="showHouseStory(7)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 7</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">O Amor Verdadeiro</span>
+            <button onclick="showPortalGuide(7)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 7</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Relacionamentos de Alto Valor</span>
             </button>
-            <button onclick="showHouseStory(8)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 8</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">Renascer e Poder</span>
+            <button onclick="showPortalGuide(8)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 8</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Reinvenção & Poder</span>
             </button>
-            <button onclick="showHouseStory(9)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 9</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">Grandes Horizontes</span>
+            <button onclick="showPortalGuide(9)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 9</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Expansão de Fronteiras</span>
             </button>
-            <button onclick="showHouseStory(10)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 10</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">Seu Apogeu e Sucesso</span>
+            <button onclick="showPortalGuide(10)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 10</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Apogeu Professional</span>
             </button>
-            <button onclick="showHouseStory(11)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 11</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">Seu Círculo de Elite</span>
+            <button onclick="showPortalGuide(11)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 11</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Rede de Alianças Estratégicas</span>
             </button>
-            <button onclick="showHouseStory(12)" class="p-3 rounded-2xl bg-cosmic-bg hover:border-cosmic-accent border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-bold">PORTAL 12</span>
-              <span class="text-xs text-white font-medium group-hover:text-cosmic-accent">Segredos Inconscientes</span>
+            <button onclick="showPortalGuide(12)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
+              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 12</span>
+              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Sabedoria & Intuição</span>
             </button>
           </div>
 
-          <!-- DETALHE SEDUTOR DO PORTAL SELECIONADO -->
-          <div id="house-detail-box" class="mt-4 p-4 rounded-2xl bg-cosmic-bg/90 border border-cosmic-purple/50 text-xs text-gray-200 leading-relaxed shadow-inner">
-            Toque em um portal acima para entender como destravar esse setor da sua vida.
+          <!-- BOX DE DETALHE AUTÔNOMO -->
+          <div id="house-detail-box" class="mt-4 p-4 rounded-2xl bg-cosmic-bg/95 border border-cosmic-gold/40 text-xs text-gray-200 leading-relaxed shadow-inner">
+            Toque em um portal acima para acessar as estratégias de autonomia desse setor.
           </div>
         </div>
 
-        <!-- CONVERSÃO FINAL E COFRE PRIVADO -->
-        <div class="p-6 rounded-3xl bg-gradient-to-br from-cosmic-card to-cosmic-bg border border-cosmic-gold/30 shadow-2xl">
+        <!-- PAINEL DE CONVERSÃO / PLANO DE EXPANSÃO -->
+        <div class="p-7 rounded-3xl bg-gradient-to-br from-cosmic-card via-cosmic-bg to-cosmic-card border border-cosmic-gold/40 shadow-2xl">
           <div class="flex items-center justify-between mb-3">
-            <h3 class="font-serif font-bold text-base text-white">Relatório Confidencial de Virada de Vida</h3>
-            <span class="text-[9px] bg-cosmic-gold/20 text-cosmic-gold px-2.5 py-1 rounded-full font-mono border border-cosmic-gold/30">ACESSO RESERVADO</span>
+            <h3 class="font-serif font-bold text-base text-white">Plano Personalizado de Expansão e Virada</h3>
+            <span class="text-[9px] bg-cosmic-gold/20 text-cosmic-gold px-3 py-1 rounded-full font-mono font-bold border border-cosmic-gold/40">ACESSO PRIVADO</span>
           </div>
           
           <p id="analysis-text" class="text-xs text-gray-300 leading-relaxed">
-            Seu código astronômico indica que você está a poucos passos de um ciclo de grande emancipação financeira. Para evitar perdas de energia com relacionamentos errados, acesse a análise profunda de escolhas e trânsitos de 12 meses guardada em seu cofre.
+            Seu mapeamento indica uma oportunidade singular de consolidação de poder e expansão financeira nos próximos meses. Aprenda a usar seus pontos fortes para acelerar conquistas no trabalho e alinhar suas relações com seus objetivos reais.
           </p>
 
-          <div class="mt-6 pt-4 border-t border-cosmic-border flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="mt-6 pt-5 border-t border-cosmic-border/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <span class="block text-xs font-bold text-white">Dossiê Completo do Seu Futuro</span>
-              <span class="text-[10px] text-gray-400">Análise de amor, carreira e decisões protegida por chave privada.</span>
+              <span class="block text-xs font-bold text-white">Dossiê Completo de Orientação Pessoal</span>
+              <span class="text-[10px] text-gray-400">Análise de trânsitos de 12 meses, carreira e dinâmicas de relacionamento.</span>
             </div>
-            <button onclick="unlockVault()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cosmic-gold to-yellow-500 text-cosmic-bg font-extrabold text-xs shadow-lg hover:scale-105 transition-all">
-              Desbloquear Meu Cofre (R$ 29,90)
+            <button onclick="unlockDossier()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cosmic-gold via-yellow-400 to-cosmic-gold text-cosmic-bg font-extrabold text-xs shadow-xl hover:scale-105 transition-all">
+              Acessar Meu Dossiê (R$ 29,90)
             </button>
           </div>
         </div>
@@ -283,44 +297,44 @@
     </div>
   </main>
 
-  <!-- RODAPÉ RESERVADO -->
-  <footer class="border-t border-cosmic-border py-4 px-4 text-center text-xs text-gray-500 bg-cosmic-bg">
-    <p>Bússola Privada • Seu Mapeamento Pessoal Confidencial e Reservado</p>
+  <!-- RODAPÉ ELEGANTE -->
+  <footer class="border-t border-cosmic-border/60 py-4 px-4 text-center text-xs text-gray-400 bg-cosmic-bg/90">
+    <p>Bússola Pessoal • Plataforma Privada de Orientação, Autonomia e Conquista</p>
   </footer>
 
   <script>
-    // NARRATIVAS ENVOLVENTES PARA OS 12 PORTAIS (SEM LINGUAGEM ACADÊMICA CHATA)
-    const houseStories = {
-      1: "Portal 1 (Seu Magnetismo): É como o mundo enxerga você antes de você falar qualquer palavra. Descubra como usar sua presença para ter autoridade e atrair olhares imediatos.",
-      2: "Portal 2 (Sua Liberdade Financeira): Onde o dinheiro e a prosperidade realmente fluem na sua vida. Descubra quais caminhos geram riqueza de forma natural e sem esgotamento.",
-      3: "Portal 3 (O Poder da Sua Fama): Como suas palavras impactam as pessoas. O segredo para se comunicar com poder, encantar multidões e fechar grandes acordos.",
-      4: "Portal 4 (Seu Refúgio Secreto): Suas raízes e sua paz emocional. Entenda como criar um ambiente protegido para recarregar sua energia e proteger sua família.",
-      5: "Portal 5 (Paixão e Criação): Onde mora a sua faísca de vida. Revela seus prazeres, sua capacidade autoral e como viver romances intensos e inesquecíveis.",
-      6: "Portal 6 (Sua Energia Diária): O segredo da sua alta performance. Como organizar seu dia sem perder a saúde nem deixar o estresse roubar seu brilho.",
-      7: "Portal 7 (O Amor Verdadeiro): A chave dos seus relacionamentos. Descubra qual perfil de parceiro atrai seu coração e como viver um amor seguro e sem jogos.",
-      8: "Portal 8 (Renascer e Poder): O portal da transformação profunda. Como se reinventar após momentos difíceis, multiplicar recursos e manter seus segredos em segurança.",
-      9: "Portal 9 (Grandes Horizontes): Seu desejo de liberdade sem limites. Revela viagens, expansão de consciência e a busca por uma vida com propósito de verdade.",
-      10: "Portal 10 (Seu Apogeu e Sucesso): O topo da sua montanha. Descubra como conquistar o reconhecimento profissional que você merece e construir um legado inabalável.",
-      11: "Portal 11 (Seu Círculo de Elite): As pessoas certas ao seu redor. Como construir uma rede de contatos poderosa que abre portas e acelera seus sonhos.",
-      12: "Portal 12 (Segredos Inconscientes): A voz da sua intuição. Aprenda a ouvir seus avisos internos para evitar ciladas e se proteger de energias invisíveis."
+    // ORIENTAÇÃO PRÁTICA E HIPNÓTICA PARA OS 12 PORTAIS
+    const portalGuides = {
+      1: "Portal 1 (Sua Presença & Impacto): Como você projeta sua imagem nos ambientes. Aprenda a usar seu estilo e linguagem corporal para gerar autoridade imediata e respeito natural.",
+      2: "Portal 2 (Prosperidade & Riqueza): O caminho para gerar valor e construir segurança financeira sólida sem depender dos padrões impostos pelos outros.",
+      3: "Portal 3 (Poder de Persuasão): Como transformar suas ideias em projetos respeitados. Descubra o poder de negociar e posicionar suas opiniões com clareza.",
+      4: "Portal 4 (Base de Poder Familiar): Seu centro de estabilidade interna. Como construir uma base familiar firme para impulsionar suas grandes conquistas no mundo externo.",
+      5: "Portal 5 (Paixão & Autoria): Onde sua criatividade e autenticidade brilham. A chave para liderar projetos autorais e vivenciar paixões marcantes.",
+      6: "Portal 6 (Alta Performance): Onde a rotina se transforma em eficiência. Métodos práticos para gerir seu tempo, energia e manter o corpo no topo da performance.",
+      7: "Portal 7 (Relacionamentos de Alto Valor): Como atrair parcerias que somam. Descubra os critérios para construir alianças equilibradas no amor e nos negócios.",
+      8: "Portal 8 (Reinvenção & Poder): Sua capacidade de superar fases difíceis e sair mais forte. A arte de gerir mudanças profundas e multiplicar seus recursos.",
+      9: "Portal 9 (Expansão de Fronteiras): O desejo de ir além do comum. Planeje grandes saltos profissionais, viagens, novos conhecimentos e independência de ação.",
+      10: "Portal 10 (Apogeu Profissional): Seu ponto de destaque. Como ser reconhecido(a) no seu setor, ocupar posições de liderança e deixar sua marca.",
+      11: "Portal 11 (Rede de Alianças Estratégicas): O valor do seu círculo social. Aprenda a se conectar com pessoas influentes que compartilham dos seus mesmos valores.",
+      12: "Portal 12 (Sabedoria & Intuição): Sua capacidade de leitura dos bastidores. Como escutar seus avisos internos para antecipar movimentos e tomar decisões certeiras."
     };
 
-    function showHouseStory(portalNumber) {
+    function showPortalGuide(portalNumber) {
       const box = document.getElementById('house-detail-box');
-      box.innerHTML = `<span class="font-bold text-cosmic-gold block mb-1 font-serif text-sm">REVELAÇÃO DO PORTAL ${portalNumber}</span>${houseStories[portalNumber]}`;
+      box.innerHTML = `<span class="font-bold text-cosmic-gold block mb-1 font-serif text-sm">DIRETRIZ DO PORTAL ${portalNumber}</span>${portalGuides[portalNumber]}`;
     }
 
-    function revealDestiny() {
+    function activateCommand() {
       const analysisBox = document.getElementById('analysis-text');
-      analysisBox.innerText = "Seu código magnético foi reprocessado. As coordenadas mostram que a sua fase de dúvida terminou. Um momento de grande clareza sobre relacionamentos e escolhas profissionais está ativo agora. Use sua intuição e proteja seus planos.";
+      analysisBox.innerText = "Coordenadas calibradas com sucesso. Sua bússola indica um ciclo de forte clareza estratégica. O momento é ideal para consolidar sua autoridade nos negócios e estabelecer limites claros para transitar com elegância em qualquer grupo.";
     }
 
-    function runLoveMatch() {
-      alert("Análise de Afinidade Magnética processada no Cofre Privado. Descubra a combinação exata entre vocês.");
+    function runSocialMapping() {
+      alert("Mapeamento de convivência gerado com sucesso. Acesse as diretrizes de relacionamento em seu painel privado.");
     }
 
-    function unlockVault() {
-      alert("Redirecionando para a área de liberação segura do seu Cofre Privado.");
+    function unlockDossier() {
+      alert("Redirecionando para a liberação do seu Dossiê Completo de Expansão.");
     }
   </script>
 </body>
