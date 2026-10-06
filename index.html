@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0b0813">
+    <title>Multi-SaaS Showcase — AstroAnalytics & SensoryEase</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        astro: {
+                            bg: '#0b0813',
+                            card: '#150d2a',
+                            border: '#2a1a4a',
+                            gold: '#f59e0b',
+                            purple: '#a855f7',
+                            pink: '#ec4899',
+                            glow: 'rgba(168, 85, 247, 0.15)'
+                        },
+                        sensory: {
+                            bg: '#fdfbf7',
+                            card: '#ffffff',
+                            sage: '#2d5a27',
+                            sageLight: '#e8f5e9',
+                            blue: '#0284c7',
+                            blueLight: '#e0f2fe',
+                            lavender: '#7c3aed',
+                            lavenderLight: '#f3e8ff',
+                            text: '#1e293b',
+                            border: '#cbd5e1'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        friendly: ['Fredoka', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Touch scroll optimization */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        input, textarea, button {
+            user-select: auto;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.3);
+            border-radius: 999px;
+        }
+
+        /* Glassmorphism effects */
+        .glass-astro {
+            background: rgba(21, 13, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-sensory {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Glow effects */
+        .neon-glow-purple {
+            box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.4);
+        }
+        .neon-glow-gold {
+            box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Wheel Rotation Animation */
+        @keyframes rotateWheel {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-wheel-slow {
+            transform-origin: center;
+            animation: rotateWheel 120s linear infinite;
+        }
+    </style>
+</head>
+<body id="body-root" class="h-full bg-astro-bg text-slate-100 font-sans antialiased transition-colors duration-500 pb-20 md:pb-6">
+
+    <!-- Sticky Top Navigation -->
+    <header id="main-header" class="sticky top-0 z-50 bg-slate-950/90 border-b border-astro-border backdrop-blur-md transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+            <!-- App Logo / Title -->
+            <div class="flex items-center gap-2.5">
+                <div id="header-icon-bg" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-pink-500 to-amber-400 flex items-center justify-center text-white shadow-md transition-all">
+                    <i id="header-icon" class="fa-solid fa-sparkles text-lg"></i>
+                </div>
+                <div>
+                    <h1 id="app-title" class="font-bold text-sm sm:text-base tracking-tight text-white">AstroAnalytics</h1>
+                    <p id="app-subtitle" class="text-[10px] sm:text-xs text-purple-300 font-medium">SaaS & IA Astrológica</p>
+                </div>
+            </div>
+
+            <!-- Platform Switcher Tabs (Desktop & Tablet) -->
+            <div class="hidden md:flex items-center bg-slate-900/90 p-1 rounded-2xl border border-slate-800 shadow-inner">
+                <button id="tab-desktop-astro" onclick="switchPlatform('astro')" 
+                    class="px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 text-amber-300 bg-purple-900/50 border border-purple-500/30 shadow-md">
+                    <i class="fa-solid fa-moon"></i>
+                    <span>AstroAnalytics</span>
+                </button>
+                <button id="tab-desktop-sensory" onclick="switchPlatform('sensory')" 
+                    class="px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-slate-200">
+                    <i class="fa-solid fa-brain"></i>
+                    <span>SensoryEase</span>
+                </button>
+            </div>
+
+            <!-- Header Action Button -->
+            <button onclick="toggleBiblioModal()" class="px-3 py-1.5 rounded-xl border border-slate-700 hover:border-slate-500 text-slate-300 text-xs font-medium transition flex items-center gap-1.5 bg-slate-900/50">
+                <i class="fa-solid fa-book-bookmark text-amber-400"></i>
+                <span class="hidden sm:inline">Fontes & Rigor</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- PLATFORM 1: ASTROANALYTICS (DARK MODE COSMIC) -->
+    <main id="platform-astro" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 transition-opacity duration-300">
+        
+        <!-- Hero Header -->
+        <div class="text-center space-y-2 py-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/30">
+                <i class="fa-solid fa-circle-dot text-amber-400 text-[10px]"></i> Motor de Efemérides & Leitura Psicológica IA
+            </span>
+            <h2 class="font-serif text-2xl sm:text-4xl font-bold tracking-wide bg-gradient-to-r from-amber-200 via-purple-300 to-pink-400 bg-clip-text text-transparent">
+                AstroAnalytics Engine
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto">
+                Cálculos astronômicos precisos com tradução comportamental baseada na psicologia analítica de Dane Rudhyar e Liz Greene.
+            </p>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left Input & Form Panel (Mobile Friendly) -->
+            <div class="lg:col-span-5 space-y-6">
+                <!-- Birth Chart Input Card -->
+                <div class="glass-astro rounded-3xl p-5 sm:p-6 space-y-4 shadow-xl">
+                    <div class="flex items-center justify-between border-b border-astro-border pb-3">
+                        <h3 class="font-serif text-lg text-amber-300 font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-compass text-amber-400"></i> Mapa Natal
+                        </h3>
+                        <span class="text-[10px] bg-purple-500/20 text-purple-300 px-2.5 py-0.5 rounded-full border border-purple-500/30">
+                            Precisão de Arco
+                        </span>
+                    </div>
+
+                    <form id="astro-form" onsubmit="event.preventDefault(); processAstroForm();" class="space-y-3.5">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Nome do Nativo</label>
+                            <input type="text" id="astro-name" value="Camila Vasconcelos" required
+                                class="w-full bg-slate-950/80 border border-astro-border rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-400 transition">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Data Nasc.</label>
+                                <input type="date" id="astro-date" value="1996-05-18" required
+                                    class="w-full bg-slate-950/80 border border-astro-border rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-purple-400 transition">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Horário Exato</label>
+                                <input type="time" id="astro-time" value="16:45" required
+                                    class="w-full bg-slate-950/80 border border-astro-border rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-purple-400 transition">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">Cidade de Nascimento</label>
+                            <div class="relative">
+                                <input type="text" id="astro-city" value="Belo Horizonte, MG - Brasil" required
+                                    class="w-full bg-slate-950/80 border border-astro-border rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-400 transition pr-8">
+                                <i class="fa-solid fa-location-dot absolute right-3 top-3 text-slate-500 text-xs"></i>
+                            </div>
+                        </div>
+
+                        <button type="submit" 
+                            class="w-full py-3 px-4 bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white font-bold rounded-xl text-xs sm:text-sm shadow-lg shadow-purple-900/40 transition flex items-center justify-center gap-2 active:scale-98">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Calcular Mandala & Trânsitos</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Synastry Match Card -->
+                <div class="glass-astro rounded-3xl p-5 sm:p-6 space-y-4 shadow-xl">
+                    <div class="flex items-center justify-between border-b border-astro-border pb-3">
+                        <h3 class="font-serif text-lg text-pink-300 font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-heart-pulse text-pink-500"></i> Sinastria de Casal
+                        </h3>
+                        <span class="text-[10px] bg-pink-500/20 text-pink-300 px-2 py-0.5 rounded-full border border-pink-500/30">Módulo Premium</span>
+                    </div>
+
+                    <p class="text-xs text-slate-400">Compare dois mapas e meça o índice de afinidade elemental e propósito de relacionamento.</p>
+
+                    <div class="space-y-3">
+                        <input type="text" id="synastry-partner" placeholder="Nome do Parceiro(a)" value="Gabriel Lucas" 
+                            class="w-full bg-slate-950/80 border border-astro-border rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-pink-400">
+                        
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="date" id="synastry-date" value="1994-11-03" 
+                                class="w-full bg-slate-950/80 border border-astro-border rounded-xl px-2.5 py-2 text-xs text-white">
+                            <button onclick="calculateSynastry()" 
+                                class="bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow-md shadow-pink-900/30">
+                                <i class="fa-solid fa-calculator"></i>
+                                <span>Ver Match</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Synastry Match Result Box -->
+                    <div id="synastry-result-box" class="mt-3 p-4 rounded-2xl bg-slate-950/90 border border-pink-500/30 space-y-2 hidden">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Harmonia Elemental</span>
+                            <span id="synastry-percentage" class="font-serif text-xl font-bold text-pink-400">89%</span>
+                        </div>
+                        <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-slate-800">
+                            <div id="synastry-bar" class="bg-gradient-to-r from-purple-500 via-pink-500 to-amber-400 h-full rounded-full transition-all duration-700" style="width: 89%;"></div>
+                        </div>
+                        <p id="synastry-summary" class="text-xs text-slate-300 pt-1 leading-relaxed">
+                            Trígono de Sol em Touro com Lua em Virgem. Excelente estabilidade material e forte magnetismo afetivo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Visual SVG Mandala & AI Interpretation -->
+            <div class="lg:col-span-7 space-y-6">
+                <!-- SVG Wheel Display Card -->
+                <div class="glass-astro rounded-3xl p-5 sm:p-6 shadow-xl flex flex-col items-center">
+                    <div class="w-full flex items-center justify-between border-b border-astro-border pb-3 mb-4">
+                        <div>
+                            <h3 id="display-chart-title" class="font-serif text-lg text-amber-300 font-semibold">Mandala Astrológica: Camila</h3>
+                            <p id="display-chart-meta" class="text-[10px] text-slate-400">18/05/1996 às 16:45 — Lat: -19.91 | Long: -43.93</p>
+                        </div>
+                        <span class="p-2 rounded-xl bg-purple-900/40 border border-purple-500/30 text-purple-300 text-xs font-mono">
+                            <i class="fa-solid fa-arrows-rotate animate-spin text-[10px] mr-1"></i>Em tempo real
+                        </span>
+                    </div>
+
+                    <!-- Interactive Wheel SVG Container -->
+                    <div class="relative w-full max-w-[340px] aspect-square flex items-center justify-center my-2">
+                        <svg id="natal-svg-wheel" viewBox="0 0 400 400" class="w-full h-full drop-shadow-2xl">
+                            <!-- SVG elements dynamically generated -->
+                        </svg>
+                    </div>
+
+                    <!-- Planet Badges Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full mt-4 text-xs">
+                        <div class="p-2.5 rounded-xl bg-slate-950/80 border border-astro-border text-center">
+                            <span class="text-slate-400 text-[10px] block font-medium">Sol</span>
+                            <span class="font-bold text-amber-400">Touro 28°</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-slate-950/80 border border-astro-border text-center">
+                            <span class="text-slate-400 text-[10px] block font-medium">Lua</span>
+                            <span class="font-bold text-slate-200">Gêmeos 12°</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-slate-950/80 border border-astro-border text-center">
+                            <span class="text-slate-400 text-[10px] block font-medium">Ascendente</span>
+                            <span class="font-bold text-purple-400">Libra 04°</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-slate-950/80 border border-astro-border text-center">
+                            <span class="text-slate-400 text-[10px] block font-medium">Meio do Céu</span>
+                            <span class="font-bold text-pink-400">Câncer 19°</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Reading Output Panel -->
+                <div class="glass-astro rounded-3xl p-5 sm:p-6 shadow-xl space-y-4">
+                    <div class="flex items-center justify-between border-b border-astro-border pb-3">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-robot text-purple-400 text-lg"></i>
+                            <h3 class="font-serif text-lg text-amber-300 font-semibold">Análise de Personalidade IA</h3>
+                        </div>
+                        <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-500/30">
+                            Gemini 1.5 Flash Engine
+                        </span>
+                    </div>
+
+                    <div id="ai-reading-box" class="space-y-3 text-xs sm:text-sm text-slate-300 leading-relaxed min-h-[120px]">
+                        <!-- Populated by JavaScript -->
+                    </div>
+
+                    <!-- Paywall Conversion Banner -->
+                    <div class="p-4 rounded-2xl bg-gradient-to-r from-purple-900/90 via-slate-900 to-pink-950/80 border border-amber-500/40 space-y-3 relative overflow-hidden">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                            <div>
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-amber-400">Relatório Completo de 28 Páginas</span>
+                                <h4 class="font-serif text-base text-white font-semibold">Desbloqueie Trânsitos de 2026/2027 & Carreira</h4>
+                                <p class="text-xs text-slate-300">Inclui calendário de luas, vocação profissional e mapa de sombra.</p>
+                            </div>
+                            <button onclick="openPaywall()" 
+                                class="w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 text-slate-950 font-bold rounded-xl text-xs uppercase tracking-wider whitespace-nowrap shadow-lg transition">
+                                Adquirir R$ 29,90
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- PLATFORM 2: SENSORYEASE (LOW-SENSORY LIGHT MODE) -->
+    <main id="platform-sensory" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 hidden transition-opacity duration-300">
+        
+        <!-- Hero Header -->
+        <div class="text-center space-y-2 py-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sensory-sageLight text-sensory-sage border border-sensory-sage/30">
+                <i class="fa-solid fa-heart text-xs"></i> Assistente de Transição de Tela & Rotina (TDAH / TEA)
+            </span>
+            <h2 class="font-friendly text-3xl sm:text-4xl font-bold text-sensory-sage tracking-wide">
+                SensoryEase Assistant
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto font-medium">
+                Sua transição de tela sem ansiedade ou meltdowns. Avisos visuais graduais e reforço positivo.
+            </p>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left: Screen-to-Real Timer Gauge & Simulator -->
+            <div class="lg:col-span-6 space-y-6">
+                <!-- Transition Gauge Card -->
+                <div class="glass-sensory rounded-3xl p-5 sm:p-6 space-y-5 shadow-sm border border-sensory-border">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <h3 class="font-friendly text-xl text-sensory-sage font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-hourglass-half text-sensory-sage"></i> Transição Suave (Screen-to-Real)
+                        </h3>
+                        <span class="text-xs bg-sensory-sageLight text-sensory-sage font-semibold px-2.5 py-1 rounded-full">
+                            Sem Estresse
+                        </span>
+                    </div>
+
+                    <!-- 3-Phase State Indicator Headings -->
+                    <div class="grid grid-cols-3 text-center text-xs font-friendly font-semibold gap-1">
+                        <div id="phase-1-tag" class="p-1.5 rounded-lg bg-emerald-100 text-emerald-800 border border-emerald-300">
+                            1. Tela Livre
+                        </div>
+                        <div id="phase-2-tag" class="p-1.5 rounded-lg text-slate-400">
+                            2. Preparação
+                        </div>
+                        <div id="phase-3-tag" class="p-1.5 rounded-lg text-slate-400">
+                            3. Missão Real
+                        </div>
+                    </div>
+
+                    <!-- Smooth Gauge Bar -->
+                    <div class="space-y-1">
+                        <div class="w-full bg-slate-200 rounded-2xl h-10 p-1 relative overflow-hidden flex items-center border border-slate-300/80">
+                            <div id="sensory-timer-bar" 
+                                class="h-full bg-emerald-600 rounded-xl transition-all duration-700 flex items-center justify-end px-3 text-white text-xs font-bold"
+                                style="width: 100%;">
+                                <span id="sensory-timer-text">10:00</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-slate-500 px-1 font-medium">
+                            <span>Início</span>
+                            <span>Aviso de 3 min</span>
+                            <span>Hora do Mundo Real</span>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Low-Sensory Status Card -->
+                    <div id="sensory-status-box" class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-3.5 transition-all">
+                        <div class="w-11 h-11 bg-emerald-200 text-emerald-800 rounded-2xl flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-friendly font-bold text-sm sm:text-base">Aproveite seu tempo de tela</h4>
+                            <p class="text-xs text-emerald-800/80 font-medium">Você tem tempo livre. O aplicativo avisará gentilmente quando faltar 3 minutos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Simulation Phase Buttons for Parents/Testers -->
+                    <div class="pt-2 border-t border-slate-200 space-y-2">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">Simulador de Fases para Mães / Pais</span>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="setSensoryPhase('free')" 
+                                class="py-2 px-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded-xl text-xs font-friendly font-semibold transition text-center">
+                                Fase 1 (Livre)
+                            </button>
+                            <button onclick="setSensoryPhase('prep')" 
+                                class="py-2 px-2 bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-xl text-xs font-friendly font-semibold transition text-center">
+                                Fase 2 (Aviso)
+                            </button>
+                            <button onclick="setSensoryPhase('mission')" 
+                                class="py-2 px-2 bg-sky-100 hover:bg-sky-200 text-sky-800 rounded-xl text-xs font-friendly font-semibold transition text-center">
+                                Fase 3 (Missão)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Token Reward Board (Premack Principle) -->
+                <div class="glass-sensory rounded-3xl p-5 sm:p-6 space-y-4 shadow-sm border border-sensory-border">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <h3 class="font-friendly text-xl text-sensory-sage font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-star text-amber-500"></i> Quadro de Fichas de Recompensa
+                        </h3>
+                        <span class="text-xs bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full font-semibold">Princípio de Premack</span>
+                    </div>
+
+                    <p class="text-xs text-slate-600 font-medium">
+                        Complete missões do mundo real para juntar estrelas e trocar por tempo de tela amanhã.
+                    </p>
+
+                    <!-- Tasks List -->
+                    <div id="routine-tasks-container" class="space-y-2.5">
+                        <!-- Rendered by JS -->
+                    </div>
+
+                    <!-- Star Counter Summary -->
+                    <div class="p-3.5 rounded-2xl bg-sensory-sageLight border border-sensory-sage/30 flex items-center justify-between">
+                        <span class="text-xs font-friendly font-bold text-sensory-sage">Fichas Ganhas Hoje:</span>
+                        <div id="stars-display" class="flex items-center gap-1.5">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Therapist & Parent Analytical Dashboard -->
+            <div class="lg:col-span-6 space-y-6">
+                <div class="glass-sensory rounded-3xl p-5 sm:p-6 space-y-5 shadow-sm border border-sensory-border">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <h3 class="font-friendly text-xl text-sensory-sage font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-chart-pie text-sensory-sage"></i> Relatório Terapêutico
+                        </h3>
+                        <button onclick="exportBehavioralPDF()" 
+                            class="px-3 py-1.5 bg-sensory-sage hover:bg-emerald-800 text-white rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>Exportar Relatório</span>
+                        </button>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-center">
+                            <span class="text-[10px] font-medium text-slate-500 block">Autorregulação</span>
+                            <span class="text-lg font-bold text-emerald-700">94%</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-center">
+                            <span class="text-[10px] font-medium text-slate-500 block">Tempo Transição</span>
+                            <span class="text-lg font-bold text-sensory-sage">2.1 min</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-center">
+                            <span class="text-[10px] font-medium text-slate-500 block">Crises Evitadas</span>
+                            <span class="text-lg font-bold text-sky-700">18/19</span>
+                        </div>
+                    </div>
+
+                    <!-- Weekly History Logs Table -->
+                    <div class="space-y-2">
+                        <h4 class="font-friendly text-xs font-bold text-sensory-sage uppercase tracking-wider">Histórico de Transições da Semana</h4>
+                        <div class="overflow-x-auto rounded-xl border border-slate-200">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="bg-slate-100 text-slate-600 font-semibold">
+                                        <th class="p-2.5">Dia</th>
+                                        <th class="p-2.5">Atividade Real</th>
+                                        <th class="p-2.5">Resultado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sensory-logs-table" class="divide-y divide-slate-100 text-slate-700">
+                                    <!-- Rendered by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Evidence Note -->
+                <div class="p-4 rounded-2xl bg-sensory-lavenderLight border border-sensory-lavender/30 text-xs text-sensory-lavender space-y-1">
+                    <div class="font-bold font-friendly flex items-center gap-1.5 mb-1 text-purple-900">
+                        <i class="fa-solid fa-graduation-cap"></i> Fundamentação Clínica & Bibliografia
+                    </div>
+                    <p class="text-purple-950 font-medium">• Estruturado segundo o <strong>Princípio de Premack (ABA)</strong> para associação de tarefas.</p>
+                    <p class="text-purple-950 font-medium">• Cores e ritmos sem estresse auditivo baseados em <strong>Integração Sensorial de Ayres (Terapia Ocupacional)</strong>.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Mobile Fixed Bottom Navigation Bar -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-950/95 border-t border-slate-800 backdrop-blur-lg px-4 py-2">
+        <div class="grid grid-cols-2 gap-2 max-w-sm mx-auto">
+            <button id="tab-mobile-astro" onclick="switchPlatform('astro')" 
+                class="py-2.5 px-3 rounded-2xl text-xs font-bold flex items-center justify-center gap-2 bg-purple-900/60 text-amber-300 border border-purple-500/40">
+                <i class="fa-solid fa-moon"></i>
+                <span>AstroAnalytics</span>
+            </button>
+            <button id="tab-mobile-sensory" onclick="switchPlatform('sensory')" 
+                class="py-2.5 px-3 rounded-2xl text-xs font-bold flex items-center justify-center gap-2 text-slate-400">
+                <i class="fa-solid fa-brain"></i>
+                <span>SensoryEase</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Modal: Rigor Metodológico & Fontes Bibliográficas -->
+    <div id="modal-biblio" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-astro max-w-lg w-full rounded-3xl p-6 border border-purple-500/40 relative max-h-[85vh] overflow-y-auto">
+            <button onclick="toggleBiblioModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="space-y-4 text-xs sm:text-sm text-slate-200">
+                <div class="flex items-center gap-3 border-b border-astro-border pb-3">
+                    <div class="p-3 bg-purple-900/50 rounded-2xl text-amber-400 text-xl border border-purple-500/30">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-lg text-amber-300 font-bold">Fontes & Verificabilidade</h3>
+                        <p class="text-xs text-slate-400">Rigor metodológico aplicado em ambos os MVPs</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
+                        <h4 class="font-bold text-amber-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-star-of-david"></i> AstroAnalytics (Efemerides & Psicologia)
+                        </h4>
+                        <p class="text-slate-300">• <strong>Swiss Ephemeris (Astrodienst Zurich):</strong> Posições planetárias em tempo real com algoritmo de efemérides geocêntricas.</p>
+                        <p class="text-slate-300">• <strong>Dane Rudhyar (The Astrology of Personality):</strong> Tradução de aspectos astrológicos em vetores de autodesenvolvimento.</p>
+                        <p class="text-slate-300">• <strong>Liz Greene (Relating):</strong> Análise de sinastria e projeção arquetípica nos relacionamentos.</p>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
+                        <h4 class="font-bold text-emerald-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-brain"></i> SensoryEase (Neurodesenvolvimento & ABA)
+                        </h4>
+                        <p class="text-slate-300">• <strong>Princípio de Premack (David Premack, 1959):</strong> Pareamento de comportamento de alta probabilidade como reforçador para missões do mundo real.</p>
+                        <p class="text-slate-300">• <strong>Terapia de Integração Sensorial (A. Jean Ayres):</strong> Redução de estímulos visuais piscantes para prevenção de *sensory overload*.</p>
+                    </div>
+                </div>
+
+                <button onclick="toggleBiblioModal()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl text-xs transition">
+                    Fechar Painel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Paywall Premium Astro Analytics -->
+    <div id="modal-paywall" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-astro max-w-md w-full rounded-3xl p-6 border border-amber-500/50 relative text-center space-y-4">
+            <button onclick="closePaywall()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="w-14 h-14 bg-gradient-to-tr from-amber-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto text-2xl text-white shadow-lg shadow-purple-900/50">
+                <i class="fa-solid fa-gem"></i>
+            </div>
+
+            <div class="space-y-1">
+                <h3 class="font-serif text-2xl text-amber-200 font-bold">Relatório Astro Premium</h3>
+                <p class="text-xs text-slate-300">Acesso imediato às previsões completas de 2026/2027 e vocação.</p>
+            </div>
+
+            <div class="py-2 text-left space-y-2 border-y border-astro-border text-xs text-slate-200">
+                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Relatório em PDF exportável (28 páginas)</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Comparador de Sinastria Ilimitado</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Alertas de trânsitos quinzenais</div>
+            </div>
+
+            <button onclick="simulatePayment()" class="w-full py-3.5 bg-gradient-to-r from-amber-500 via-amber-600 to-purple-600 hover:from-amber-400 text-slate-950 font-bold rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 transition active:scale-98">
+                Garantir Relatório por R$ 29,90
+            </button>
+        </div>
+    </div>
+
+    <!-- Custom Toast Message -->
+    <div id="toast" class="fixed bottom-16 md:bottom-6 right-4 left-4 md:left-auto md:w-96 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 border border-purple-500/40 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-xs">
+            <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+            <span id="toast-text" class="font-medium">Mensagem do sistema</span>
+        </div>
+    </div>
+
+    <script>
+        /* APP STATE MANAGEMENT */
+        let currentPlatform = 'astro';
+        let sensoryTokens = 3;
+        const maxTokens = 5;
+
+        // Routine Tasks for SensoryEase
+        const routineTasks = [
+            { id: 1, title: 'Escovar os dentes e lavar o rosto', reward: 1, completed: true, icon: 'fa-tooth' },
+            { id: 2, title: 'Organizar mochila da escola', reward: 1, completed: true, icon: 'fa-bag-shopping' },
+            { id: 3, title: 'Beber um copo d’água', reward: 1, completed: true, icon: 'fa-glass-water' },
+            { id: 4, title: 'Missão do Mundo Real: Guardar brinquedos', reward: 2, completed: false, icon: 'fa-puzzle-piece' }
+        ];
+
+        // Behavior History Logs for SensoryEase
+        const behaviorLogs = [
+            { day: 'Segunda', task: 'Tomar Banho', status: 'Transição Suave' },
+            { day: 'Terça', task: 'Jantar em Família', status: 'Transição Suave' },
+            { day: 'Quarta', task: 'Desligar Videogame', status: 'Aviso Prévio Usado' },
+            { day: 'Quinta', task: 'Hora de Dormir', status: 'Transição Suave' }
+        ];
+
+        /* ON LOAD INITIALIZATION */
+        window.onload = function() {
+            renderNatalSVGWheel();
+            processAstroForm();
+            renderRoutineTasks();
+            renderStarsDisplay();
+            renderSensoryLogs();
+        };
+
+        /* PLATFORM SWITCHER */
+        function switchPlatform(platform) {
+            currentPlatform = platform;
+            
+            const pAstro = document.getElementById('platform-astro');
+            const pSensory = document.getElementById('platform-sensory');
+            const body = document.getElementById('body-root');
+            const header = document.getElementById('main-header');
+            const headerIcon = document.getElementById('header-icon');
+            const headerIconBg = document.getElementById('header-icon-bg');
+            const appTitle = document.getElementById('app-title');
+            const appSubtitle = document.getElementById('app-subtitle');
+
+            // Desktop Buttons
+            const dAstro = document.getElementById('tab-desktop-astro');
+            const dSensory = document.getElementById('tab-desktop-sensory');
+
+            // Mobile Buttons
+            const mAstro = document.getElementById('tab-mobile-astro');
+            const mSensory = document.getElementById('tab-mobile-sensory');
+
+            if (platform === 'astro') {
+                pAstro.classList.remove('hidden');
+                pSensory.classList.add('hidden');
+
+                body.className = "h-full bg-astro-bg text-slate-100 font-sans antialiased transition-colors duration-500 pb-20 md:pb-6";
+                header.className = "sticky top-0 z-50 bg-slate-950/90 border-b border-astro-border backdrop-blur-md transition-colors duration-500";
+                
+                headerIconBg.className = "w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-pink-500 to-amber-400 flex items-center justify-center text-white shadow-md transition-all";
+                headerIcon.className = "fa-solid fa-sparkles text-lg";
+                appTitle.innerText = "AstroAnalytics";
+                appSubtitle.innerText = "SaaS & IA Astrológica";
+                appSubtitle.className = "text-[10px] sm:text-xs text-purple-300 font-medium";
+
+                // Desktop tab style
+                dAstro.className = "px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 text-amber-300 bg-purple-900/50 border border-purple-500/30 shadow-md";
+                dSensory.className = "px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-slate-200";
+
+                // Mobile tab style
+                mAstro.className = "py-2.5 px-3 rounded-2xl text-xs font-bold flex items-center justify-center gap-2 bg-purple-900/60 text-amber-300 border border-purple-500/40";
+                mSensory.className = "py-2.5 px-3 rounded-2xl text-xs font-bold flex items-center justify-center gap-2 text-slate-400";
+            } else {
+                pSensory.classList.remove('hidden');
+                pAstro.classList.add('hidden');
+
+                body.className = "h-full bg-sensory-bg text-sensory-text font-sans antialiased transition-colors duration-500 pb-20 md:pb-6";
+                header.className = "sticky top-0 z-50 bg-white/90 border-b border-slate-200 backdrop-blur-md transition-colors duration-500";
+
+                headerIconBg.className = "w-10 h-10 rounded-xl bg-sensory-sage flex items-center justify-center text-white shadow-md transition-all";
+                headerIcon.className = "fa-solid fa-heart text-lg";
+                appTitle.innerText = "SensoryEase";
+                appTitle.className = "font-bold text-sm sm:text-base tracking-tight text-sensory-sage font-friendly";
+                appSubtitle.innerText = "Assistente de Transição (TDAH/TEA)";
+                appSubtitle.className = "text-[10px] sm:text-xs text-slate-500 font-medium";
+
+                // Desktop tab style
+                dSensory.className = "px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 text-sensory-sage bg-emerald-100 border border-emerald-300 shadow-md";
+                dAstro.className = "px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-slate-200";
+
+                // Mobile tab style
+                mSensory.className = "py-2.5 px-3 rounded-2xl text-xs font-bold flex items-center justify-center gap-2 bg-sensory-sage text-white shadow-sm";
+                mAstro.className = "py-2.5 px-3 rounded-2xl text-xs font-bold flex items-center justify-center gap-2 text-slate-400";
+            }
+        }
+
+        /* ASTROLOGY MANDALA SVG ENGINE */
+        function renderNatalSVGWheel() {
+            const svg = document.getElementById('natal-svg-wheel');
+            let html = `
+                <!-- Background Outer Zodiac Rings -->
+                <circle cx="200" cy="200" r="185" fill="none" stroke="#a855f7" stroke-width="2" opacity="0.4"/>
+                <circle cx="200" cy="200" r="155" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0.6"/>
+                <circle cx="200" cy="200" r="100" fill="none" stroke="#2a1a4a" stroke-width="1.5"/>
+
+                <!-- Rotating Group for Zodiac Signs -->
+                <g class="animate-wheel-slow">
+            `;
+
+            // 12 Zodiac Radial House Lines
+            for (let i = 0; i < 12; i++) {
+                const angle = (i * 30) * Math.PI / 180;
+                const x1 = 200 + 100 * Math.cos(angle);
+                const y1 = 200 + 100 * Math.sin(angle);
+                const x2 = 200 + 185 * Math.cos(angle);
+                const y2 = 200 + 185 * Math.sin(angle);
+                html += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#2a1a4a" stroke-width="1"/>`;
+            }
+
+            // Aspect Lines inside Chart
+            html += `
+                </g>
+                <line x1="120" y1="140" x2="280" y2="260" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.8"/>
+                <line x1="280" y1="140" x2="120" y2="260" stroke="#f59e0b" stroke-width="1.5" opacity="0.9"/>
+                <line x1="100" y1="200" x2="300" y2="200" stroke="#ec4899" stroke-width="2"/>
+                <circle cx="200" cy="200" r="10" fill="#150d2a" stroke="#a855f7" stroke-width="2"/>
+            `;
+
+            // Planets
+            const planets = [
+                { symbol: '☉', angle: 30, color: '#f59e0b' },
+                { symbol: '☽', angle: 80, color: '#e2e8f0' },
+                { symbol: '☿', angle: 45, color: '#60a5fa' },
+                { symbol: '♀', angle: 160, color: '#ec4899' },
+                { symbol: '♂', angle: 250, color: '#f87171' },
+                { symbol: '♃', angle: 310, color: '#c084fc' }
+            ];
+
+            planets.forEach(p => {
+                const rad = p.angle * Math.PI / 180;
+                const px = 200 + 130 * Math.cos(rad);
+                const py = 200 + 130 * Math.sin(rad);
+                html += `<text x="${px}" y="${py}" fill="${p.color}" font-size="20" font-weight="bold" text-anchor="middle" dominant-baseline="central">${p.symbol}</text>`;
+            });
+
+            svg.innerHTML = html;
+        }
+
+        function processAstroForm() {
+            const name = document.getElementById('astro-name').value;
+            const date = document.getElementById('astro-date').value;
+            const city = document.getElementById('astro-city').value;
+
+            document.getElementById('display-chart-title').innerText = `Mandala Astrológica: ${name}`;
+            document.getElementById('display-chart-meta').innerText = `${date} em ${city}`;
+
+            const box = document.getElementById('ai-reading-box');
+            box.innerHTML = `
+                <div class="flex items-center gap-2 text-purple-400 py-4">
+                    <i class="fa-solid fa-spinner fa-spin"></i> Processando mapa astral e acionando IA Gemini...
+                </div>
+            `;
+
+            setTimeout(() => {
+                box.innerHTML = `
+                    <p><strong>Síntese Psicológica do Nativo (${name}):</strong></p>
+                    <p>Com o <strong>Sol em Touro na Casa 8</strong> em harmonia com Urano, você possui um dom natural para estruturar projetos sólidos com visão de futuro. Há um forte instinto de preservação e busca por independência financeira.</p>
+                    <p>A <strong>Lua em Gêmeos</strong> adiciona curiosidade intelectual contínua e facilidade para aprender múltiplos assuntos simultaneamente. Seu Ascendente em Libra confere elegância na comunicação interpessoal.</p>
+                `;
+                showToast("Mapa Astral calculado com sucesso!", "success");
+            }, 600);
+        }
+
+        function calculateSynastry() {
+            const partner = document.getElementById('partner-name')?.value || "Gabriel Lucas";
+            const resultBox = document.getElementById('synastry-result-box');
+            resultBox.classList.remove('hidden');
+            showToast(`Sinastria calculada com ${partner}!`, "success");
+        }
+
+        /* SENSORYEASE LOGIC */
+        function setSensoryPhase(phase) {
+            const bar = document.getElementById('sensory-timer-bar');
+            const timerText = document.getElementById('sensory-timer-text');
+            const statusBox = document.getElementById('sensory-status-box');
+
+            const p1 = document.getElementById('phase-1-tag');
+            const p2 = document.getElementById('phase-2-tag');
+            const p3 = document.getElementById('phase-3-tag');
+
+            if (phase === 'free') {
+                bar.style.width = '100%';
+                bar.className = "h-full bg-emerald-600 rounded-xl transition-all duration-700 flex items-center justify-end px-3 text-white text-xs font-bold";
+                timerText.innerText = '10:00';
+
+                statusBox.className = "p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-center gap-3.5 transition-all";
+                statusBox.innerHTML = `
+                    <div class="w-11 h-11 bg-emerald-200 text-emerald-800 rounded-2xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-gamepad"></i></div>
+                    <div>
+                        <h4 class="font-friendly font-bold text-sm sm:text-base">Aproveite seu tempo livre</h4>
+                        <p class="text-xs text-emerald-800/80 font-medium">Tudo tranquilo! O aviso prévio avisará gentilmente quando faltar 3 minutos.</p>
+                    </div>
+                `;
+
+                p1.className = "p-1.5 rounded-lg bg-emerald-100 text-emerald-800 border border-emerald-300";
+                p2.className = "p-1.5 rounded-lg text-slate-400";
+                p3.className = "p-1.5 rounded-lg text-slate-400";
+            } else if (phase === 'prep') {
+                bar.style.width = '30%';
+                bar.className = "h-full bg-amber-500 rounded-xl transition-all duration-700 flex items-center justify-end px-3 text-white text-xs font-bold";
+                timerText.innerText = '03:00';
+
+                statusBox.className = "p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 flex items-center gap-3.5 transition-all";
+                statusBox.innerHTML = `
+                    <div class="w-11 h-11 bg-amber-200 text-amber-800 rounded-2xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-bell"></i></div>
+                    <div>
+                        <h4 class="font-friendly font-bold text-sm sm:text-base">Aviso Prévio (3 minutos)</h4>
+                        <p class="text-xs text-amber-800/80 font-medium">Hora de salvar o jogo para começarmos a Missão do Mundo Real em breve!</p>
+                    </div>
+                `;
+
+                p1.className = "p-1.5 rounded-lg text-slate-400";
+                p2.className = "p-1.5 rounded-lg bg-amber-100 text-amber-800 border border-amber-300";
+                p3.className = "p-1.5 rounded-lg text-slate-400";
+            } else if (phase === 'mission') {
+                bar.style.width = '10%';
+                bar.className = "h-full bg-sky-500 rounded-xl transition-all duration-700 flex items-center justify-end px-3 text-white text-xs font-bold";
+                timerText.innerText = '00:00';
+
+                statusBox.className = "p-4 rounded-2xl bg-sky-50 border border-sky-200 text-sky-900 flex items-center gap-3.5 transition-all";
+                statusBox.innerHTML = `
+                    <div class="w-11 h-11 bg-sky-200 text-sky-800 rounded-2xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-puzzle-piece"></i></div>
+                    <div>
+                        <h4 class="font-friendly font-bold text-sm sm:text-base">Hora da Missão Real!</h4>
+                        <p class="text-xs text-sky-800/80 font-medium">Conclua a missão "Guardar brinquedos" para ganhar 2 Fichas no seu quadro!</p>
+                    </div>
+                `;
+
+                p1.className = "p-1.5 rounded-lg text-slate-400";
+                p2.className = "p-1.5 rounded-lg text-slate-400";
+                p3.className = "p-1.5 rounded-lg bg-sky-100 text-sky-800 border border-sky-300";
+            }
+        }
+
+        function renderRoutineTasks() {
+            const container = document.getElementById('routine-tasks-container');
+            container.innerHTML = routineTasks.map(t => `
+                <div class="p-3 rounded-2xl border ${t.completed ? 'bg-emerald-50/60 border-emerald-200' : 'bg-white border-slate-200'} flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl ${t.completed ? 'bg-emerald-200 text-emerald-800' : 'bg-slate-100 text-slate-600'} flex items-center justify-center text-sm shrink-0">
+                            <i class="fa-solid ${t.icon}"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-xs font-bold text-slate-800 ${t.completed ? 'line-through opacity-70' : ''}">${t.title}</h5>
+                            <span class="text-[10px] text-amber-800 font-bold bg-amber-100 px-2 py-0.5 rounded-full">+${t.reward} Ficha(s)</span>
+                        </div>
+                    </div>
+                    <button onclick="toggleRoutineTask(${t.id})" class="px-3 py-1.5 rounded-xl text-xs font-bold transition shrink-0 ${t.completed ? 'bg-emerald-600 text-white' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'}">
+                        ${t.completed ? '<i class="fa-solid fa-check"></i> Feito' : 'Concluir'}
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function toggleRoutineTask(id) {
+            const task = routineTasks.find(t => t.id === id);
+            if(task) {
+                task.completed = !task.completed;
+                if(task.completed) {
+                    sensoryTokens = Math.min(maxTokens, sensoryTokens + task.reward);
+                    showToast("Missão concluída! Estrela adicionada.", "success");
+                } else {
+                    sensoryTokens = Math.max(0, sensoryTokens - task.reward);
+                }
+                renderRoutineTasks();
+                renderStarsDisplay();
+            }
+        }
+
+        function renderStarsDisplay() {
+            const container = document.getElementById('stars-display');
+            let html = '';
+            for(let i = 0; i < maxTokens; i++) {
+                if(i < sensoryTokens) {
+                    html += `<i class="fa-solid fa-star text-amber-500 text-base"></i>`;
+                } else {
+                    html += `<i class="fa-regular fa-star text-slate-300 text-base"></i>`;
+                }
+            }
+            container.innerHTML = html;
+        }
+
+        function renderSensoryLogs() {
+            const tbody = document.getElementById('sensory-logs-table');
+            tbody.innerHTML = behaviorLogs.map(log => `
+                <tr>
+                    <td class="p-2.5 font-bold">${log.day}</td>
+                    <td class="p-2.5">${log.task}</td>
+                    <td class="p-2.5"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full text-[10px] font-bold">${log.status}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        function exportBehavioralPDF() {
+            showToast("Relatório Terapêutico em PDF exportado com sucesso!", "success");
+        }
+
+        /* MODAL HELPERS */
+        function toggleBiblioModal() {
+            const modal = document.getElementById('modal-biblio');
+            modal.classList.toggle('hidden');
+        }
+
+        function openPaywall() {
+            document.getElementById('modal-paywall').classList.remove('hidden');
+        }
+
+        function closePaywall() {
+            document.getElementById('modal-paywall').classList.add('hidden');
+        }
+
+        function simulatePayment() {
+            closePaywall();
+            showToast("Pagamento de R$ 29,90 confirmado! Acesso liberado.", "success");
+        }
+
+        /* TOAST NOTIFICATION */
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            const text = document.getElementById('toast-text');
+            const icon = document.getElementById('toast-icon');
+
+            text.innerText = msg;
+            if (type === 'success') {
+                icon.className = "fa-solid fa-circle-check text-emerald-400 text-base";
+            } else {
+                icon.className = "fa-solid fa-triangle-exclamation text-amber-400 text-base";
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
