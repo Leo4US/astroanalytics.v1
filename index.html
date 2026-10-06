@@ -1,340 +1,934 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="h-full">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bússola Pessoal • O Centro de Comando do Seu Destino</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bússola Astral • Santuário de Ancoragem & Revelação</title>
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Fonts: Cinzel for Sacred Titles & Plus Jakarta Sans for Fluid Reading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            cosmic: {
-              bg: '#0c071e',
-              card: '#180f38',
-              accent: '#f43f5e',
-              gold: '#fbbf24',
-              purple: '#c084fc',
-              cyan: '#38bdf8',
-              border: '#3b2572'
+            astral: {
+              bg: '#FAF6F0',         // Alabastro Velado
+              surface: '#F3EBE0',    // Areia Nacarada
+              card: 'rgba(255, 253, 249, 0.85)', // Cristal de Alabastro
+              border: '#E2D5C3',     // Ouro Suave Bordas
+              accent: '#C8933F',     // Ouro Velho Champagne
+              gold: '#D4AF37',       // Ouro Estelar
+              rose: '#E8A598',       // Ouro Rosa Brilhante
+              indigo: '#2A2050',     // Índigo Místico Noturno
+              purple: '#5B4171',     // Roxo Imperial Velado
+              text: '#332845',       // Texto Densa Nobreza
+              subtext: '#685A78',    // Subtexto Aveludado
             }
           },
           fontFamily: {
             serif: ['Cinzel', 'serif'],
             sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          boxShadow: {
+            'astral-glow': '0 10px 40px -10px rgba(212, 175, 55, 0.25)',
+            'rose-glow': '0 10px 30px -10px rgba(232, 165, 152, 0.3)',
+            'card-float': '0 20px 40px -15px rgba(42, 32, 80, 0.08)',
           }
         }
       }
     }
   </script>
+
   <style>
-    .bg-star-glow {
+    /* Custom Scrollbar for smooth aura feel */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF6F0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #E2D5C3;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C8933F;
+    }
+
+    /* Background Astral Glow (Claro Magnético) */
+    .bg-astral-glow {
+      background-color: #FAF6F0;
       background-image: 
-        radial-gradient(circle at 50% 20%, rgba(251, 191, 36, 0.18) 0%, transparent 40%),
-        radial-gradient(circle at 80% 60%, rgba(192, 132, 252, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 20% 80%, rgba(244, 63, 94, 0.15) 0%, transparent 40%);
+        radial-gradient(circle at 15% 15%, rgba(232, 165, 152, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 85% 25%, rgba(212, 175, 55, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(91, 65, 113, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
     }
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.8; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.03); }
+
+    /* Pulsing Light Aura Animation */
+    @keyframes auraPulse {
+      0%, 100% { opacity: 0.85; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); filter: drop-shadow(0 0 15px rgba(212,175,55,0.4)); }
     }
-    .pulse-glow {
-      animation: pulseGlow 6s ease-in-out infinite;
+    .aura-pulse {
+      animation: auraPulse 7s ease-in-out infinite;
     }
-    @keyframes orbit {
+
+    /* Celestial Orbit Rotation */
+    @keyframes orbitSlow {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
     .orbit-slow {
-      animation: orbit 45s linear infinite;
+      animation: orbitSlow 60s linear infinite;
     }
-    .text-gold-glow {
-      text-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+    .orbit-reverse {
+      animation: orbitSlow 90s linear infinite reverse;
     }
-    .text-pink-glow {
-      text-shadow: 0 0 20px rgba(244, 63, 94, 0.7);
+
+    /* Glassmorphic Frosted Card */
+    .frosted-glass {
+      background: rgba(255, 253, 249, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(226, 213, 195, 0.8);
+    }
+
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #A8762B 0%, #D4AF37 50%, #8A5A19 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .text-rose-gradient {
+      background: linear-gradient(135deg, #C96B5B 0%, #E8A598 50%, #8C3E33 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   </style>
 </head>
-<body class="bg-cosmic-bg text-gray-100 font-sans antialiased bg-star-glow selection:bg-cosmic-gold selection:text-cosmic-bg min-h-screen flex flex-col justify-between">
+<body class="bg-astral-glow text-astral-text font-sans antialiased min-h-full flex flex-col justify-between selection:bg-astral-rose/30 selection:text-astral-indigo">
 
-  <!-- CABEÇALHO LUMINOSO -->
-  <header class="sticky top-0 z-50 backdrop-blur-xl bg-cosmic-bg/80 border-b border-cosmic-border/60 px-4 py-3.5">
-    <div class="max-w-6xl mx-auto flex items-center justify-between">
+  <!-- CABEÇALHO MAGNÉTICO E LUMINOSO -->
+  <header class="sticky top-0 z-40 frosted-glass border-b border-astral-border/70 px-4 py-3 shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Logo & Título do Santuário -->
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cosmic-gold via-cosmic-accent to-cosmic-purple flex items-center justify-center font-serif font-bold text-cosmic-bg shadow-lg shadow-cosmic-gold/30">
-          ✦
+        <div class="relative w-10 h-10 rounded-full bg-gradient-to-tr from-astral-accent via-astral-rose to-astral-purple p-0.5 shadow-md shadow-astral-gold/20 flex items-center justify-center cursor-pointer hover:rotate-45 transition-transform duration-500" onclick="resetToHome()">
+          <div class="w-full h-full bg-astral-bg rounded-full flex items-center justify-center text-astral-accent font-serif font-bold text-lg">
+            ✦
+          </div>
         </div>
         <div>
-          <h1 class="font-serif font-extrabold text-base leading-none tracking-widest text-white">BÚSSOLA PESSOAL</h1>
-          <p class="text-[9px] text-cosmic-gold tracking-widest font-mono font-bold uppercase mt-0.5">Centro de Comando & Conquista</p>
+          <h1 class="font-serif font-extrabold text-sm md:text-base leading-none tracking-widest text-astral-indigo">
+            BÚSSOLA ASTRAL
+          </h1>
+          <p class="text-[10px] text-astral-accent font-semibold tracking-widest uppercase mt-0.5 flex items-center gap-1">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Santuário de Ancoragem & Revelação
+          </p>
         </div>
       </div>
-      
+
+      <!-- Ações de Cabeçalho / Conexão Privada -->
       <div class="flex items-center gap-2">
-        <span class="px-3.5 py-1 rounded-full bg-gradient-to-r from-cosmic-gold/20 to-cosmic-purple/20 border border-cosmic-gold/40 text-[10px] font-bold text-cosmic-gold font-mono tracking-wider shadow-sm">
-          ✨ AMBIENTE SEGURO & PRIVADO
+        <button onclick="openVaultModal()" class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-astral-surface border border-astral-border/80 text-xs font-semibold text-astral-indigo hover:bg-astral-card hover:border-astral-accent transition-all duration-300 shadow-sm">
+          <i class="fa-solid fa-box-archive text-astral-accent"></i>
+          <span>Arcano Pessoal</span>
+          <span class="w-2 h-2 rounded-full bg-astral-rose animate-ping"></span>
+        </button>
+
+        <span class="px-3 py-1 rounded-full bg-gradient-to-r from-astral-gold/15 to-astral-rose/20 border border-astral-gold/30 text-[10px] font-bold text-astral-indigo font-mono tracking-wider flex items-center gap-1.5">
+          <i class="fa-solid fa-shield-halved text-astral-accent"></i>
+          <span>SELO PRIVADO</span>
         </span>
       </div>
     </div>
   </header>
 
-  <!-- MÓDULO PRINCIPAL DE EMPODERAMENTO E CONQUISTA -->
-  <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
-    
-    <!-- HERO NARRATIVO: DESEJO, CLAREZA E EXPANSÃO -->
-    <div class="text-center max-w-3xl mx-auto mb-14">
-      <span class="px-4 py-1.5 rounded-full bg-cosmic-gold/15 border border-cosmic-gold/40 text-cosmic-gold text-xs font-bold uppercase tracking-widest inline-block mb-4 shadow-sm">
-        Sua Rampa de Lançamento Pessoal
-      </span>
-      <h2 class="font-serif text-3xl md:text-5xl font-black text-white leading-tight text-pink-glow">
-        Tome o controle do seu destino e conquiste a vida que você merece.
-      </h2>
-      <p class="text-sm md:text-base text-gray-200 mt-5 leading-relaxed font-normal">
-        Você não nasceu para viver na dúvida ou aceitar menos do que deseja. Descubra como transitar entre as pessoas com magnetismo, destravar sua prosperidade e viver o amor com clareza e autonomia.
-      </p>
-    </div>
+  <!-- CONTEÚDO PRINCIPAL DO APLICATIVO -->
+  <main class="max-w-7xl mx-auto px-4 py-6 md:py-8 flex-grow w-full space-y-8">
 
-    <div class="grid md:grid-cols-12 gap-8 items-start">
+    <!-- HERO NARRATIVO: A CÂMARA DE ATIVAÇÃO -->
+    <section class="text-center max-w-3xl mx-auto space-y-4">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-astral-surface border border-astral-gold/40 text-astral-indigo text-xs font-semibold tracking-wider uppercase shadow-sm">
+        <i class="fa-solid fa-sparkles text-astral-accent"></i>
+        <span>A Câmara de Ativação do Seu Eixo</span>
+      </div>
       
-      <!-- PAINEL DE COMANDO: ENTRADA DE DADOS -->
-      <div class="md:col-span-5 space-y-6">
-        <div class="p-7 rounded-3xl bg-cosmic-card/90 border border-cosmic-border/80 shadow-2xl backdrop-blur-md relative overflow-hidden">
-          <div class="absolute -top-10 -right-10 w-36 h-36 bg-cosmic-gold/20 rounded-full blur-3xl"></div>
-          
-          <h3 class="font-serif font-bold text-xl text-white mb-1 flex items-center justify-between">
-            <span>Ativar Seu Mapeamento</span>
-            <span class="text-xs text-cosmic-gold font-mono font-bold">PASSO 1</span>
-          </h3>
-          <p class="text-xs text-gray-300 mb-6">Insira suas coordenadas para calibrar sua bússola de expansão.</p>
-          
-          <form id="astro-form" onsubmit="event.preventDefault(); activateCommand();" class="space-y-4.5">
+      <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-astral-indigo leading-tight tracking-tight">
+        Desperte o magnetismo do seu mapa natal e alinhe sua essência radiante.
+      </h2>
+      
+      <p class="text-sm md:text-base text-astral-subtext max-w-2xl mx-auto leading-relaxed font-normal">
+        Acesse clareza absoluta sobre seus ciclos astrológicos, padrões de atração e estratégias arquetípicas para agir com autonomia, sabedoria e elegância no mundo.
+      </p>
+
+      <!-- MODOS VIBRACIONAIS (TOGGLE DE FREQUÊNCIA) -->
+      <div class="pt-2 flex justify-center">
+        <div class="p-1.5 rounded-2xl bg-astral-surface border border-astral-border inline-flex gap-1 shadow-inner">
+          <button id="btn-mode-ser" onclick="switchMode('ser')" class="px-5 py-2.5 rounded-xl font-serif text-xs font-bold transition-all duration-300 flex items-center gap-2 bg-astral-card text-astral-indigo shadow-md border border-astral-gold/30">
+            <i class="fa-solid fa-moon text-astral-purple"></i>
+            <span>Santuário do Ser</span>
+            <span class="text-[9px] font-sans font-normal opacity-70">(Essência & Intuição)</span>
+          </button>
+
+          <button id="btn-mode-pista" onclick="switchMode('pista')" class="px-5 py-2.5 rounded-xl font-serif text-xs font-bold transition-all duration-300 flex items-center gap-2 text-astral-subtext hover:text-astral-indigo">
+            <i class="fa-solid fa-sun text-astral-gold"></i>
+            <span>O Despertar na Pista</span>
+            <span class="text-[9px] font-sans font-normal opacity-70">(Ação & Presença Social)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID LAYOUT PRINCIPAL -->
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+
+      <!-- PAINEL ESQUERDO: INICIAÇÃO & ORÁCULO EM TEMPO REAL -->
+      <div class="lg:col-span-5 space-y-6">
+
+        <!-- FORMULÁRIO DE INICIAÇÃO -->
+        <div class="p-6 md:p-7 rounded-3xl frosted-glass shadow-card-float relative overflow-hidden transition-all hover:border-astral-gold/50">
+          <div class="absolute -top-12 -right-12 w-32 h-32 bg-astral-rose/20 rounded-full blur-2xl pointer-events-none"></div>
+
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-serif font-bold text-lg text-astral-indigo flex items-center gap-2">
+              <i class="fa-solid fa-compass text-astral-accent"></i>
+              <span>Coordenadas de Iniciação</span>
+            </h3>
+            <span class="text-[10px] font-mono font-bold text-astral-accent bg-astral-surface px-2.5 py-1 rounded-full border border-astral-border">PASSO 1</span>
+          </div>
+
+          <p class="text-xs text-astral-subtext mb-5 leading-relaxed">
+            Insira os dados do seu nascimento para calibração exata das efemérides astronômicas e alinhamento do seu Santuário.
+          </p>
+
+          <form id="form-coordenadas" onsubmit="event.preventDefault(); calibrarFrequencia();" class="space-y-4">
             <div>
-              <label class="block text-xs text-gray-300 mb-1.5 font-semibold">Como deseja ser identificado(a)?</label>
-              <input type="text" placeholder="Seu nome ou código" value="Consulente Pessoal" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cosmic-gold transition-all">
+              <label class="block text-xs font-semibold text-astral-indigo mb-1">Nome ou Nome de Batismo Astral</label>
+              <div class="relative">
+                <i class="fa-solid fa-user text-astral-subtext/60 absolute left-3.5 top-3.5 text-xs"></i>
+                <input type="text" id="input-nome" value="Consulente Vibracional" required class="w-full bg-astral-bg/90 border border-astral-border rounded-xl pl-9 pr-4 py-2.5 text-xs text-astral-text focus:outline-none focus:border-astral-gold focus:ring-1 focus:ring-astral-gold transition-all">
+              </div>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block text-xs text-gray-300 mb-1.5 font-semibold">Data de Nascimento</label>
-                <input type="date" value="1998-05-18" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-3 py-3 text-sm text-white focus:outline-none focus:border-cosmic-gold transition-all">
+                <label class="block text-xs font-semibold text-astral-indigo mb-1">Data Celeste</label>
+                <input type="date" id="input-data" value="1998-05-18" required class="w-full bg-astral-bg/90 border border-astral-border rounded-xl px-3 py-2.5 text-xs text-astral-text focus:outline-none focus:border-astral-gold transition-all">
               </div>
               <div>
-                <label class="block text-xs text-gray-300 mb-1.5 font-semibold">Hora Exata</label>
-                <input type="time" value="21:15" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-3 py-3 text-sm text-white focus:outline-none focus:border-cosmic-gold transition-all">
+                <label class="block text-xs font-semibold text-astral-indigo mb-1">Horário Exato</label>
+                <input type="time" id="input-hora" value="21:15" required class="w-full bg-astral-bg/90 border border-astral-border rounded-xl px-3 py-2.5 text-xs text-astral-text focus:outline-none focus:border-astral-gold transition-all">
               </div>
             </div>
 
             <div>
-              <label class="block text-xs text-gray-300 mb-1.5 font-semibold">Cidade de Nascimento</label>
-              <input type="text" placeholder="Cidade e Estado" value="São Paulo, SP" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cosmic-gold transition-all">
+              <label class="block text-xs font-semibold text-astral-indigo mb-1">Local de Origem (Cidade / Estado)</label>
+              <div class="relative">
+                <i class="fa-solid fa-location-dot text-astral-subtext/60 absolute left-3.5 top-3.5 text-xs"></i>
+                <input type="text" id="input-cidade" value="São Paulo, SP" required class="w-full bg-astral-bg/90 border border-astral-border rounded-xl pl-9 pr-4 py-2.5 text-xs text-astral-text focus:outline-none focus:border-astral-gold transition-all">
+              </div>
             </div>
 
-            <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-cosmic-gold via-cosmic-accent to-cosmic-purple text-cosmic-bg font-extrabold text-sm shadow-xl shadow-cosmic-gold/20 hover:scale-[1.02] transition-all">
-              Calibrar Bússola de Conquista
+            <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-astral-accent via-astral-gold to-astral-rose text-white font-serif font-extrabold text-xs tracking-wider shadow-astral-glow hover:opacity-95 transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2">
+              <i class="fa-solid fa-sparkles"></i>
+              <span>Ativar Frequência do Santuário</span>
             </button>
           </form>
         </div>
 
-        <!-- RECURSO DÍNAMO: NAVEGAÇÃO SOCIAL & RELAÇÕES DE PODER -->
-        <div class="p-7 rounded-3xl bg-cosmic-card/90 border border-cosmic-border/80 shadow-xl relative">
-          <span class="text-[10px] font-extrabold tracking-widest text-cosmic-gold uppercase block mb-1">Clarividência Social & Afetiva</span>
-          <h3 class="font-serif font-bold text-lg text-white mb-2">Mapeador de Convivência & Magnetismo</h3>
-          <p class="text-xs text-gray-300 mb-5 leading-relaxed">Descubra como se posicionar com presença marcante e entender o alinhamento real entre você e qualquer pessoa.</p>
+        <!-- ORÁCULO INTERATIVO EM TEMPO REAL (CHAT DA BÚSSOLA ASTRAL) -->
+        <div class="p-6 rounded-3xl frosted-glass shadow-card-float border border-astral-border flex flex-col h-[480px] relative">
           
-          <div class="space-y-3.5">
-            <input type="text" placeholder="Nome da pessoa" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-4 py-3 text-sm text-white">
-            <input type="date" class="w-full bg-cosmic-bg/90 border border-cosmic-border rounded-2xl px-4 py-3 text-sm text-white">
-            <button onclick="runSocialMapping()" class="w-full py-3.5 rounded-2xl border-2 border-cosmic-gold text-cosmic-gold font-extrabold text-xs hover:bg-cosmic-gold/15 transition-all">
-              Mapear Dinâmica do Relacionamento
+          <!-- Cabeçalho do Chat -->
+          <div class="pb-3 border-b border-astral-border/60 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-gradient-to-br from-astral-purple to-astral-indigo flex items-center justify-center text-astral-gold text-xs shadow-sm">
+                ✦
+              </div>
+              <div>
+                <h4 class="font-serif font-bold text-xs text-astral-indigo">Oráculo da Bússola Astral</h4>
+                <p class="text-[9px] text-emerald-600 font-medium flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Conectado aos Trânsitos Ativos
+                </p>
+              </div>
+            </div>
+            <span class="text-[10px] text-astral-subtext font-mono bg-astral-surface px-2 py-0.5 rounded-full border border-astral-border">RESPOSTA INSTANTÂNEA</span>
+          </div>
+
+          <!-- Mensagens do Chat -->
+          <div id="chat-messages" class="flex-grow my-3 overflow-y-auto space-y-3 pr-1 text-xs leading-relaxed">
+            
+            <!-- Mensagem Inicial da IA -->
+            <div class="flex gap-2 items-start">
+              <div class="w-6 h-6 rounded-full bg-astral-surface border border-astral-gold/40 flex-shrink-0 flex items-center justify-center text-[10px] text-astral-accent font-serif">
+                ✦
+              </div>
+              <div class="bg-astral-surface/90 border border-astral-border p-3 rounded-2xl rounded-tl-none text-astral-text shadow-sm">
+                <p class="font-semibold text-astral-indigo mb-1">Saudações ao seu Santuário Pessoal.</p>
+                <p>Sou o Oráculo da Bússola. Suas coordenadas revelam um momento de refinamento do seu poder pessoal e expressão radiante no mundo. O que seus ciclos pedem para ser revelado hoje?</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sugestões Rápidas de Perguntas -->
+          <div class="py-2 overflow-x-auto flex gap-1.5 text-[10px] whitespace-nowrap no-scrollbar">
+            <button onclick="sendQuickPrompt('Qual é o meu maior ponto cego nos relacionamentos hoje?')" class="px-2.5 py-1 rounded-full bg-astral-surface hover:bg-astral-gold/20 border border-astral-border text-astral-indigo transition-all">
+              ✨ Ponto Cego Afetivo
+            </button>
+            <button onclick="sendQuickPrompt('Como posso canalizar minha energia profissional este mês?')" class="px-2.5 py-1 rounded-full bg-astral-surface hover:bg-astral-gold/20 border border-astral-border text-astral-indigo transition-all">
+              💼 Alinhamento de Carreira
+            </button>
+            <button onclick="sendQuickPrompt('Qual o conselho dos astros para a minha presença social?')" class="px-2.5 py-1 rounded-full bg-astral-surface hover:bg-astral-gold/20 border border-astral-border text-astral-indigo transition-all">
+              👑 Magnetismo & Presença
             </button>
           </div>
+
+          <!-- Caixa de Envio de Mensagem -->
+          <form id="chat-form" onsubmit="event.preventDefault(); handleChatSubmit();" class="pt-2 border-t border-astral-border/60 flex items-center gap-2">
+            <input type="text" id="chat-input" placeholder="Pergunte ao Oráculo sobre seu mapa ou momento..." class="flex-grow bg-astral-bg border border-astral-border rounded-xl px-3.5 py-2 text-xs text-astral-text focus:outline-none focus:border-astral-gold transition-all">
+            <button type="submit" class="w-9 h-9 rounded-xl bg-astral-indigo hover:bg-astral-purple text-astral-gold flex items-center justify-center transition-all shadow-sm">
+              <i class="fa-solid fa-paper-plane text-xs"></i>
+            </button>
+          </form>
+
         </div>
+
+        <!-- Mapeamento de Ressonância & Afinidade Arquetípica -->
+        <div class="p-6 rounded-3xl frosted-glass shadow-card-float border border-astral-border relative">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-bold tracking-widest text-astral-accent uppercase">Sincronia & Afinidade</span>
+            <span class="text-[9px] text-astral-purple font-mono bg-astral-purple/10 px-2 py-0.5 rounded-full">SINASTRIA</span>
+          </div>
+          <h3 class="font-serif font-bold text-base text-astral-indigo mb-1">Mapeamento de Ressonância Arquetípica</h3>
+          <p class="text-xs text-astral-subtext mb-4 leading-relaxed">
+            Avalie o nível de magnetismo, fluidez e alinhamento vibracional com sócios, parceiros ou contatos estratégicos.
+          </p>
+
+          <form onsubmit="event.preventDefault(); calcularRessonancia();" class="space-y-3">
+            <input type="text" id="res-nome" placeholder="Nome da pessoa em análise" required class="w-full bg-astral-bg/90 border border-astral-border rounded-xl px-3.5 py-2 text-xs text-astral-text focus:outline-none focus:border-astral-gold transition-all">
+            <input type="date" id="res-data" required class="w-full bg-astral-bg/90 border border-astral-border rounded-xl px-3.5 py-2 text-xs text-astral-text focus:outline-none focus:border-astral-gold transition-all">
+            
+            <button type="submit" class="w-full py-2.5 rounded-xl border border-astral-accent text-astral-indigo font-serif font-bold text-xs hover:bg-astral-accent/15 transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-people-arrows text-astral-accent"></i>
+              <span>Mapear Ressonância Arquetípica</span>
+            </button>
+          </form>
+
+          <!-- Resultado do Mapeamento (Oculto Inicialmente) -->
+          <div id="ressonancia-result" class="hidden mt-4 p-3.5 rounded-2xl bg-astral-surface border border-astral-gold/40 text-xs animate-fade-in space-y-1.5">
+            <div class="flex justify-between items-center font-serif font-bold text-astral-indigo">
+              <span id="res-titulo">Ressonância Vibracional</span>
+              <span id="res-porcentagem" class="text-astral-accent font-mono text-sm">89%</span>
+            </div>
+            <p id="res-descricao" class="text-astral-subtext text-[11px] leading-relaxed">
+              Alto alinhamento entre a Vênus de ambos. Comunicação com fluidez magnética e excelente potencial para grandes projetos e conexão verdadeira.
+            </p>
+          </div>
+        </div>
+
       </div>
 
-      <!-- PAINEL VISUAL DA MANDALA LUMINOSA -->
-      <div class="md:col-span-7 space-y-6">
-        
-        <!-- MANDALA HIPNÓTICA & BRILHANTE -->
-        <div class="p-7 rounded-3xl bg-cosmic-card/90 border border-cosmic-border/80 flex flex-col items-center justify-center relative min-h-[400px] shadow-2xl backdrop-blur-md">
-          <div class="absolute top-4 right-4 text-[9px] text-cosmic-gold font-mono tracking-widest font-bold">ALINHAMENTO EM TEMPO REAL</div>
-          
-          <div class="relative w-80 h-80 my-2 pulse-glow">
-            <svg class="w-full h-full orbit-slow" viewBox="0 0 200 200">
-              <circle cx="100" cy="100" r="95" fill="none" stroke="#3b2572" stroke-width="2" />
-              <circle cx="100" cy="100" r="75" fill="none" stroke="#c084fc" stroke-width="1.5" stroke-dasharray="4 4" />
-              <circle cx="100" cy="100" r="50" fill="none" stroke="#fbbf24" stroke-width="1.5" />
-              
-              <line x1="10" y1="100" x2="190" y2="100" stroke="#3b2572" stroke-width="1.5" />
-              <line x1="100" y1="10" x2="100" y2="190" stroke="#3b2572" stroke-width="1.5" />
-              <line x1="36" y1="36" x2="164" y2="164" stroke="#3b2572" stroke-width="1" />
-              <line x1="164" y1="36" x2="36" y2="164" stroke="#3b2572" stroke-width="1" />
+      <!-- PAINEL DIREITO: MANDALA LUMINOSA, PORTAIS E SELO DA SABEDORIA -->
+      <div class="lg:col-span-7 space-y-6">
 
-              <!-- PLANETAS LUMINOSOS -->
-              <circle cx="100" cy="25" r="7" fill="#f43f5e" />
-              <circle cx="160" cy="70" r="6" fill="#fbbf24" />
-              <circle cx="140" cy="150" r="8" fill="#c084fc" />
-              <circle cx="50" cy="130" r="6" fill="#38bdf8" />
+        <!-- MANDALA ASTRAL LUMINOSA E INTERATIVA -->
+        <div class="p-6 md:p-8 rounded-3xl frosted-glass shadow-card-float border border-astral-border flex flex-col items-center justify-center relative min-h-[420px]">
+          
+          <div class="absolute top-4 right-4 text-[9px] text-astral-accent font-mono tracking-widest font-bold bg-astral-surface px-3 py-1 rounded-full border border-astral-border">
+            EFEMÉRIDES ATIVAS EM TEMPO REAL
+          </div>
+
+          <div class="relative w-72 h-72 sm:w-80 sm:h-80 my-4 aura-pulse">
+            <!-- Anéis de Órbita Astrológica -->
+            <svg class="w-full h-full orbit-slow" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="95" fill="none" stroke="#E2D5C3" stroke-width="1.5" />
+              <circle cx="100" cy="100" r="78" fill="none" stroke="#C8933F" stroke-width="1" stroke-dasharray="3 3" />
+              <circle cx="100" cy="100" r="55" fill="none" stroke="#E8A598" stroke-width="1.2" />
+              <circle cx="100" cy="100" r="32" fill="none" stroke="#5B4171" stroke-width="0.8" />
+              
+              <!-- Divisões das Casas Astrológicas -->
+              <line x1="5" y1="100" x2="195" y2="100" stroke="#E2D5C3" stroke-width="1" />
+              <line x1="100" y1="5" x2="100" y2="195" stroke="#E2D5C3" stroke-width="1" />
+              <line x1="33" y1="33" x2="167" y2="167" stroke="#E2D5C3" stroke-width="0.8" />
+              <line x1="167" y1="33" x2="33" y2="164" stroke="#E2D5C3" stroke-width="0.8" />
+
+              <!-- Corpos Celestes em Destaque -->
+              <circle cx="100" cy="22" r="6" fill="#D4AF37" class="cursor-pointer hover:r-8 transition-all" title="Sol em Touro" />
+              <circle cx="162" cy="70" r="5" fill="#E8A598" class="cursor-pointer hover:r-7 transition-all" title="Vênus em Gêmeos" />
+              <circle cx="142" cy="155" r="7" fill="#5B4171" class="cursor-pointer hover:r-9 transition-all" title="Lua em Escorpião" />
+              <circle cx="45" cy="132" r="5" fill="#3B82F6" class="cursor-pointer hover:r-7 transition-all" title="Mercúrio em Áries" />
             </svg>
 
+            <!-- Órbita Interna Reversa -->
+            <svg class="w-full h-full absolute inset-0 orbit-reverse opacity-60" viewBox="0 0 200 200">
+              <polygon points="100,20 170,140 30,140" fill="none" stroke="#D4AF37" stroke-width="0.5" />
+              <polygon points="100,180 30,60 170,60" fill="none" stroke="#E8A598" stroke-width="0.5" />
+            </svg>
+
+            <!-- Núcleo Luminoso Central -->
             <div class="absolute inset-0 flex items-center justify-center">
-              <div class="text-center bg-cosmic-bg/95 p-4 rounded-full border-2 border-cosmic-gold shadow-2xl">
-                <span class="block font-serif text-[10px] font-bold text-cosmic-gold">SOL EM</span>
-                <span class="block text-sm font-extrabold text-white tracking-widest text-gold-glow">TOURO</span>
+              <div class="text-center bg-astral-card/95 p-4 rounded-full border-2 border-astral-gold/60 shadow-astral-glow transform hover:scale-105 transition-all duration-300">
+                <span class="block font-serif text-[9px] font-bold text-astral-accent tracking-widest uppercase">EIXO VIBRACIONAL</span>
+                <span id="mandala-signo-principal" class="block text-sm sm:text-base font-extrabold text-astral-indigo tracking-wider font-serif">SOL EM TOURO</span>
+                <span id="mandala-ascendente" class="block text-[10px] text-astral-subtext font-semibold">ASC. ESCORPIÃO</span>
               </div>
             </div>
           </div>
 
+          <!-- Tríade de Aspectos Rápidos -->
           <div class="w-full grid grid-cols-3 gap-3 text-center text-xs mt-2">
-            <div class="p-3 rounded-2xl bg-cosmic-bg/70 border border-cosmic-border">
-              <span class="block text-gray-400 text-[9px] font-mono font-semibold">SEU CHARME</span>
-              <span class="font-bold text-cosmic-accent">Vênus em Gêmeos</span>
+            <div class="p-3 rounded-2xl bg-astral-surface/80 border border-astral-border">
+              <span class="block text-astral-subtext text-[9px] font-mono font-semibold uppercase">PRESENÇA SOCIAL</span>
+              <span id="aspecto-charme" class="font-bold text-astral-indigo text-xs">Vênus em Gêmeos</span>
             </div>
-            <div class="p-3 rounded-2xl bg-cosmic-bg/70 border border-cosmic-border">
-              <span class="block text-gray-400 text-[9px] font-mono font-semibold">SUA PRESENÇA</span>
-              <span class="font-bold text-cosmic-purple">Escorpião</span>
+            <div class="p-3 rounded-2xl bg-astral-surface/80 border border-astral-border">
+              <span class="block text-astral-subtext text-[9px] font-mono font-semibold uppercase">MAGNETISMO</span>
+              <span id="aspecto-presenca" class="font-bold text-astral-purple text-xs">Lua em Escorpião</span>
             </div>
-            <div class="p-3 rounded-2xl bg-cosmic-bg/70 border border-cosmic-border">
-              <span class="block text-gray-400 text-[9px] font-mono font-semibold">SUA EXPANSÃO</span>
-              <span class="font-bold text-cosmic-gold">Casa 10 em Leão</span>
+            <div class="p-3 rounded-2xl bg-astral-surface/80 border border-astral-border">
+              <span class="block text-astral-subtext text-[9px] font-mono font-semibold uppercase">EXPANSÃO DE EIXO</span>
+              <span id="aspecto-expansao" class="font-bold text-astral-accent text-xs">Casa 10 em Leão</span>
             </div>
           </div>
         </div>
 
-        <!-- GUIA DE AUTONOMIA: OS 12 PORTAIS DE CONQUISTA -->
-        <div class="p-7 rounded-3xl bg-cosmic-card/90 border border-cosmic-border/80">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h3 class="font-serif font-bold text-lg text-white">Sua Jornada de Autonomia & Expansão</h3>
-              <p class="text-xs text-gray-300">Toque nos setores abaixo para acessar a orientação prática de cada área.</p>
-            </div>
-            <span class="px-3 py-1 rounded-full bg-cosmic-gold/20 text-cosmic-gold text-[10px] font-mono font-bold border border-cosmic-gold/30">12 PORTAIS</span>
-          </div>
-
-          <!-- BOTOES LUMINOSOS DOS PORTAIS -->
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5 max-h-60 overflow-y-auto pr-1">
-            <button onclick="showPortalGuide(1)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 1</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Sua Presença & Impacto</span>
-            </button>
-            <button onclick="showPortalGuide(2)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 2</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Prosperidade & Riqueza</span>
-            </button>
-            <button onclick="showPortalGuide(3)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 3</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Poder de Persuasão</span>
-            </button>
-            <button onclick="showPortalGuide(4)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 4</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Base de Poder Familiar</span>
-            </button>
-            <button onclick="showPortalGuide(5)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 5</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Paixão & Autoria</span>
-            </button>
-            <button onclick="showPortalGuide(6)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 6</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Alta Performance</span>
-            </button>
-            <button onclick="showPortalGuide(7)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 7</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Relacionamentos de Alto Valor</span>
-            </button>
-            <button onclick="showPortalGuide(8)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 8</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Reinvenção & Poder</span>
-            </button>
-            <button onclick="showPortalGuide(9)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 9</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Expansão de Fronteiras</span>
-            </button>
-            <button onclick="showPortalGuide(10)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 10</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Apogeu Professional</span>
-            </button>
-            <button onclick="showPortalGuide(11)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 11</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Rede de Alianças Estratégicas</span>
-            </button>
-            <button onclick="showPortalGuide(12)" class="p-3 rounded-2xl bg-cosmic-bg/80 hover:border-cosmic-gold border border-cosmic-border text-left transition-all group">
-              <span class="block text-[10px] text-cosmic-gold font-extrabold">PORTAL 12</span>
-              <span class="text-xs text-white font-semibold group-hover:text-cosmic-gold">Sabedoria & Intuição</span>
-            </button>
-          </div>
-
-          <!-- BOX DE DETALHE AUTÔNOMO -->
-          <div id="house-detail-box" class="mt-4 p-4 rounded-2xl bg-cosmic-bg/95 border border-cosmic-gold/40 text-xs text-gray-200 leading-relaxed shadow-inner">
-            Toque em um portal acima para acessar as estratégias de autonomia desse setor.
-          </div>
-        </div>
-
-        <!-- PAINEL DE CONVERSÃO / PLANO DE EXPANSÃO -->
-        <div class="p-7 rounded-3xl bg-gradient-to-br from-cosmic-card via-cosmic-bg to-cosmic-card border border-cosmic-gold/40 shadow-2xl">
+        <!-- EXPLORADOR DOS 12 PORTAIS DE TRANSMUTAÇÃO -->
+        <div class="p-6 md:p-7 rounded-3xl frosted-glass shadow-card-float border border-astral-border">
           <div class="flex items-center justify-between mb-3">
-            <h3 class="font-serif font-bold text-base text-white">Plano Personalizado de Expansão e Virada</h3>
-            <span class="text-[9px] bg-cosmic-gold/20 text-cosmic-gold px-3 py-1 rounded-full font-mono font-bold border border-cosmic-gold/40">ACESSO PRIVADO</span>
+            <div>
+              <h3 class="font-serif font-bold text-base text-astral-indigo">Os 12 Portais de Transmutação & Expansão</h3>
+              <p class="text-xs text-astral-subtext">Selecione uma casa astrológica para revelar a diretriz de sabedoria correspondente.</p>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-astral-gold/15 text-astral-accent text-[10px] font-mono font-bold border border-astral-gold/30">12 CASAS</span>
           </div>
-          
-          <p id="analysis-text" class="text-xs text-gray-300 leading-relaxed">
-            Seu mapeamento indica uma oportunidade singular de consolidação de poder e expansão financeira nos próximos meses. Aprenda a usar seus pontos fortes para acelerar conquistas no trabalho e alinhar suas relações com seus objetivos reais.
+
+          <!-- BOTOES LUMINOSOS DOS PORTAIS (GRID SCROLLABLE) -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 max-h-56 overflow-y-auto pr-1">
+            <button onclick="selecionarPortal(1)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 01</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Presença & Impacto</span>
+            </button>
+
+            <button onclick="selecionarPortal(2)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 02</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Prosperidade & Valor</span>
+            </button>
+
+            <button onclick="selecionarPortal(3)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 03</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Poder de Persuasão</span>
+            </button>
+
+            <button onclick="selecionarPortal(4)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 04</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Base & Ancoragem</span>
+            </button>
+
+            <button onclick="selecionarPortal(5)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 05</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Autoria & Criatividade</span>
+            </button>
+
+            <button onclick="selecionarPortal(6)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 06</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Alta Eficiência</span>
+            </button>
+
+            <button onclick="selecionarPortal(7)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 07</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Alianças de Alto Valor</span>
+            </button>
+
+            <button onclick="selecionarPortal(8)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 08</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Reinventar & Alquimia</span>
+            </button>
+
+            <button onclick="selecionarPortal(9)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 09</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Expansão de Fronteiras</span>
+            </button>
+
+            <button onclick="selecionarPortal(10)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 10</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Apogeu & Reconhecimento</span>
+            </button>
+
+            <button onclick="selecionarPortal(11)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 11</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Rede de Influência</span>
+            </button>
+
+            <button onclick="selecionarPortal(12)" class="portal-btn p-2.5 rounded-2xl bg-astral-surface hover:bg-astral-gold/15 border border-astral-border hover:border-astral-gold text-left transition-all group">
+              <span class="block text-[9px] text-astral-accent font-extrabold font-mono">PORTAL 12</span>
+              <span class="text-xs text-astral-indigo font-semibold group-hover:text-astral-accent">Intuição & Sabedoria</span>
+            </button>
+          </div>
+
+          <!-- BOX DE DETALHE AUTÔNOMO DOS PORTAIS -->
+          <div id="portal-detail-box" class="mt-4 p-4 rounded-2xl bg-astral-surface/90 border border-astral-gold/40 text-xs text-astral-text leading-relaxed shadow-sm transition-all duration-300">
+            <span class="font-bold text-astral-accent block mb-1 font-serif text-sm">✦ Selecione um Portal</span>
+            Toque em um dos portais acima para visualizar as diretrizes arquetípicas e o conselho prático para esse setor da sua vida.
+          </div>
+        </div>
+
+        <!-- O SELO DA SABEDORIA / ARCANO PESSOAL (ÁREA DE CONVERSÃO & REVELAÇÃO) -->
+        <div class="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-astral-card via-astral-surface to-astral-card border border-astral-gold/60 shadow-astral-glow relative overflow-hidden">
+          <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-astral-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-scroll text-astral-accent"></i>
+              <h3 class="font-serif font-bold text-base text-astral-indigo">O Selo da Sabedoria • Arcano Pessoal de Virada</h3>
+            </div>
+            <span class="text-[9px] bg-astral-gold/20 text-astral-indigo px-3 py-1 rounded-full font-mono font-bold border border-astral-gold/40">DOCUMENTO REVERENCIADO</span>
+          </div>
+
+          <p id="selo-narrativa-text" class="text-xs text-astral-subtext leading-relaxed mb-6">
+            Identificamos um alinhamento crítico na sua Casa 10 e no regente do seu Ascendente para as próximas semanas. Este padrão temporal marca um ponto de inflexão definitivo de clareza interna e autoridade externa. O relatório completo com cronograma exato de trânsitos foi sintetizado para seu acesso confidencial.
           </p>
 
-          <div class="mt-6 pt-5 border-t border-cosmic-border/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="pt-4 border-t border-astral-border/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <span class="block text-xs font-bold text-white">Dossiê Completo de Orientação Pessoal</span>
-              <span class="text-[10px] text-gray-400">Análise de trânsitos de 12 meses, carreira e dinâmicas de relacionamento.</span>
+              <span class="block text-xs font-bold text-astral-indigo">Dossiê Completo de Virada & Transmutação</span>
+              <span class="text-[10px] text-astral-subtext">Disponibilização imediata em PDF criptografado + Leitura no Arcano Pessoal.</span>
             </div>
-            <button onclick="unlockDossier()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cosmic-gold via-yellow-400 to-cosmic-gold text-cosmic-bg font-extrabold text-xs shadow-xl hover:scale-105 transition-all">
-              Acessar Meu Dossiê (R$ 29,90)
+
+            <button onclick="openCheckoutModal()" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-astral-accent via-astral-gold to-astral-rose text-white font-serif font-extrabold text-xs shadow-rose-glow hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap">
+              <i class="fa-solid fa-key"></i>
+              <span>Desbloquear Arcano Pessoal — R$ 29,90</span>
             </button>
           </div>
         </div>
 
       </div>
+
     </div>
+
   </main>
 
   <!-- RODAPÉ ELEGANTE -->
-  <footer class="border-t border-cosmic-border/60 py-4 px-4 text-center text-xs text-gray-400 bg-cosmic-bg/90">
-    <p>Bússola Pessoal • Plataforma Privada de Orientação, Autonomia e Conquista</p>
+  <footer class="border-t border-astral-border/70 py-6 px-4 text-center text-xs text-astral-subtext bg-astral-surface/60 mt-12 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2 font-serif font-semibold text-astral-indigo">
+        <span>✦ Bússola Astral</span>
+        <span class="text-astral-border">•</span>
+        <span class="text-[11px] font-sans font-normal text-astral-subtext">Santuário de Ancoragem, Autonomia e Revelação</span>
+      </div>
+      <p class="text-[11px] text-astral-subtext/80">
+        © 2026 Bússola Astral • Todos os relatórios são protegidos pelo Selo Privado.
+      </p>
+    </div>
   </footer>
 
+  <!-- MODAL DE CHECKOUT / MICROTRANSAÇÃO (PIX & CARTÃO) -->
+  <div id="modal-checkout" class="fixed inset-0 z-50 bg-astral-indigo/40 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-astral-card border border-astral-gold/60 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative transform scale-95 transition-all duration-300" id="checkout-box">
+      
+      <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-astral-surface text-astral-subtext hover:text-astral-indigo flex items-center justify-center text-xs transition-all">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="text-center mb-5">
+        <div class="w-12 h-12 rounded-full bg-astral-gold/20 border border-astral-gold flex items-center justify-center mx-auto mb-2 text-astral-accent text-lg">
+          ✦
+        </div>
+        <h3 class="font-serif font-bold text-lg text-astral-indigo">Liberação do Selo da Sabedoria</h3>
+        <p class="text-xs text-astral-subtext">Acesso ilimitado ao seu Dossiê de Virada no Arcano Pessoal</p>
+      </div>
+
+      <!-- Abas de Pagamento -->
+      <div class="flex bg-astral-surface p-1 rounded-xl mb-4 border border-astral-border">
+        <button id="tab-pix" onclick="switchPaymentTab('pix')" class="flex-1 py-1.5 text-xs font-semibold rounded-lg bg-astral-card text-astral-indigo shadow-sm transition-all">
+          <i class="fa-solid fa-pix text-emerald-600"></i> Pix Instantâneo
+        </button>
+        <button id="tab-card" onclick="switchPaymentTab('card')" class="flex-1 py-1.5 text-xs font-semibold rounded-lg text-astral-subtext transition-all">
+          <i class="fa-solid fa-credit-card"></i> Cartão em 1-Clique
+        </button>
+      </div>
+
+      <!-- Conteúdo Pix -->
+      <div id="content-pix" class="space-y-4 text-center">
+        <div class="p-3 bg-white rounded-2xl border border-astral-border inline-block shadow-inner">
+          <!-- Mock QR Code em SVG -->
+          <svg class="w-36 h-36 mx-auto" viewBox="0 0 100 100">
+            <rect width="100" height="100" fill="#ffffff"/>
+            <path d="M0,0 h30 v30 h-30 z M10,10 h10 v10 h-10 z" fill="#2A2050"/>
+            <path d="M70,0 h30 v30 h-30 z M80,10 h10 v10 h-10 z" fill="#2A2050"/>
+            <path d="M0,70 h30 v30 h-30 z M10,80 h10 v10 h-10 z" fill="#2A2050"/>
+            <rect x="40" y="40" width="20" height="20" fill="#D4AF37"/>
+            <rect x="35" y="10" width="10" height="25" fill="#2A2050"/>
+            <rect x="10" y="35" width="25" height="10" fill="#2A2050"/>
+            <rect x="60" y="70" width="25" height="15" fill="#2A2050"/>
+            <rect x="70" y="50" width="15" height="15" fill="#2A2050"/>
+          </svg>
+        </div>
+
+        <div>
+          <span class="block text-[11px] text-astral-subtext font-mono mb-1">CÓDIGO PIX COPIA E COLA:</span>
+          <div class="flex items-center gap-1.5 bg-astral-surface p-2 rounded-xl border border-astral-border text-xs">
+            <input type="text" readonly value="00020126580014BR.GOV.BCB.PIX0136bussola-astral-selo-sabedoria-2026" class="bg-transparent flex-grow text-[10px] font-mono text-astral-indigo focus:outline-none truncate">
+            <button onclick="copyPixCode()" class="px-2.5 py-1 rounded-lg bg-astral-indigo text-astral-gold font-bold text-[10px] hover:bg-astral-purple transition-all">
+              Copiar
+            </button>
+          </div>
+        </div>
+
+        <button onclick="simularAprovacaoPagamento()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-serif font-bold text-xs shadow-md transition-all">
+          Simular Confirmação do Pix
+        </button>
+      </div>
+
+      <!-- Conteúdo Cartão (Oculto Inicialmente) -->
+      <div id="content-card" class="hidden space-y-3">
+        <div>
+          <label class="block text-[10px] font-semibold text-astral-indigo mb-1">Número do Cartão</label>
+          <input type="text" placeholder="0000 0000 0000 0000" class="w-full bg-astral-bg border border-astral-border rounded-xl px-3 py-2 text-xs text-astral-indigo focus:outline-none focus:border-astral-gold">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[10px] font-semibold text-astral-indigo mb-1">Validade</label>
+            <input type="text" placeholder="MM/AA" class="w-full bg-astral-bg border border-astral-border rounded-xl px-3 py-2 text-xs text-astral-indigo focus:outline-none focus:border-astral-gold">
+          </div>
+          <div>
+            <label class="block text-[10px] font-semibold text-astral-indigo mb-1">CVV</label>
+            <input type="text" placeholder="123" class="w-full bg-astral-bg border border-astral-border rounded-xl px-3 py-2 text-xs text-astral-indigo focus:outline-none focus:border-astral-gold">
+          </div>
+        </div>
+        <button onclick="simularAprovacaoPagamento()" class="w-full py-3 rounded-xl bg-gradient-to-r from-astral-accent to-astral-gold text-white font-serif font-bold text-xs shadow-md hover:opacity-95 transition-all mt-2">
+          Pagar R$ 29,90 e Liberação Imediata
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL DO ARCANO PESSOAL (VAULT/COFRE DE RELATÓRIOS) -->
+  <div id="modal-vault" class="fixed inset-0 z-50 bg-astral-indigo/40 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-astral-card border border-astral-gold/60 rounded-3xl p-6 sm:p-8 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl relative" id="vault-box">
+      
+      <button onclick="closeVaultModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-astral-surface text-astral-subtext hover:text-astral-indigo flex items-center justify-center text-xs transition-all">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-full bg-astral-purple/10 border border-astral-purple/30 flex items-center justify-center text-astral-purple text-base font-serif">
+          ✦
+        </div>
+        <div>
+          <h3 class="font-serif font-bold text-lg text-astral-indigo">Seu Arcano Pessoal</h3>
+          <p class="text-xs text-astral-subtext">Cofre de Relatórios Estratégicos & Mapeamentos Adquiridos</p>
+        </div>
+      </div>
+
+      <div id="vault-content-list" class="space-y-4">
+        <!-- Item 1: Dossiê de Virada -->
+        <div class="p-4 rounded-2xl bg-astral-surface border border-astral-gold/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2 py-0.5 rounded bg-astral-accent/20 text-astral-accent text-[9px] font-bold font-mono">LIBERADO</span>
+              <span class="text-[10px] text-astral-subtext">Disponibilizado em 2026</span>
+            </div>
+            <h4 class="font-serif font-bold text-sm text-astral-indigo">Selo da Sabedoria • Mapeamento de Virada</h4>
+            <p class="text-xs text-astral-subtext">Análise completa de trânsitos na Casa 10, carreira e magnetismo afetivo.</p>
+          </div>
+          <button onclick="alert('Fazendo download do seu relatório criptografado em PDF...')" class="px-4 py-2 rounded-xl bg-astral-indigo text-astral-gold font-serif font-bold text-xs hover:bg-astral-purple transition-all flex items-center gap-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Baixar PDF</span>
+          </button>
+        </div>
+
+        <!-- Item 2: Carta Natal -->
+        <div class="p-4 rounded-2xl bg-astral-surface border border-astral-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-700 text-[9px] font-bold font-mono">NATIVO</span>
+              <span class="text-[10px] text-astral-subtext">Santuário do Ser</span>
+            </div>
+            <h4 class="font-serif font-bold text-sm text-astral-indigo">Frequência Base Natal</h4>
+            <p class="text-xs text-astral-subtext">Coordenadas de nascimento calibradas e mandala base ativada.</p>
+          </div>
+          <button onclick="closeVaultModal()" class="px-4 py-2 rounded-xl border border-astral-border text-astral-indigo font-serif font-bold text-xs hover:bg-astral-surface transition-all">
+            Visualizar no Painel
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <script>
-    // ORIENTAÇÃO PRÁTICA E HIPNÓTICA PARA OS 12 PORTAIS
-    const portalGuides = {
-      1: "Portal 1 (Sua Presença & Impacto): Como você projeta sua imagem nos ambientes. Aprenda a usar seu estilo e linguagem corporal para gerar autoridade imediata e respeito natural.",
-      2: "Portal 2 (Prosperidade & Riqueza): O caminho para gerar valor e construir segurança financeira sólida sem depender dos padrões impostos pelos outros.",
-      3: "Portal 3 (Poder de Persuasão): Como transformar suas ideias em projetos respeitados. Descubra o poder de negociar e posicionar suas opiniões com clareza.",
-      4: "Portal 4 (Base de Poder Familiar): Seu centro de estabilidade interna. Como construir uma base familiar firme para impulsionar suas grandes conquistas no mundo externo.",
-      5: "Portal 5 (Paixão & Autoria): Onde sua criatividade e autenticidade brilham. A chave para liderar projetos autorais e vivenciar paixões marcantes.",
-      6: "Portal 6 (Alta Performance): Onde a rotina se transforma em eficiência. Métodos práticos para gerir seu tempo, energia e manter o corpo no topo da performance.",
-      7: "Portal 7 (Relacionamentos de Alto Valor): Como atrair parcerias que somam. Descubra os critérios para construir alianças equilibradas no amor e nos negócios.",
-      8: "Portal 8 (Reinvenção & Poder): Sua capacidade de superar fases difíceis e sair mais forte. A arte de gerir mudanças profundas e multiplicar seus recursos.",
-      9: "Portal 9 (Expansão de Fronteiras): O desejo de ir além do comum. Planeje grandes saltos profissionais, viagens, novos conhecimentos e independência de ação.",
-      10: "Portal 10 (Apogeu Profissional): Seu ponto de destaque. Como ser reconhecido(a) no seu setor, ocupar posições de liderança e deixar sua marca.",
-      11: "Portal 11 (Rede de Alianças Estratégicas): O valor do seu círculo social. Aprenda a se conectar com pessoas influentes que compartilham dos seus mesmos valores.",
-      12: "Portal 12 (Sabedoria & Intuição): Sua capacidade de leitura dos bastidores. Como escutar seus avisos internos para antecipar movimentos e tomar decisões certeiras."
+    /* DADOS DOS 12 PORTAIS DE TRANSMUTAÇÃO */
+    const portalData = {
+      1: {
+        titulo: "PORTAL 01 (Presença & Impacto)",
+        subtitulo: "A Imagem Arquetípica e a Projeção Pessoal",
+        descricao: "Este portal rege como você se projeta nos ambientes. Aprenda a alinhar sua postura física, tom de voz e estilo para transmitir autoridade e magnetismo natural sem precisar elevar a voz."
+      },
+      2: {
+        titulo: "PORTAL 02 (Prosperidade & Valor)",
+        subtitulo: "Ancoragem Material e Senso de Merecimento",
+        descricao: "Rege o fluxo de abundância e a capacidade de precificar seu tempo e talento. O conselho aqui é reconhecer seu valor único e eliminar a necessidade de validação externa para prosperar."
+      },
+      3: {
+        titulo: "PORTAL 03 (Poder de Persuasão)",
+        subtitulo: "Comunicação Magnética e Inteligência Social",
+        descricao: "Regência do intelecto e da fala. Descubra como articular suas ideias com clareza cristalina, influenciar negociações e transformar simples diálogos em pactos de confiança."
+      },
+      4: {
+        titulo: "PORTAL 04 (Base & Ancoragem)",
+        subtitulo: "Santuário Interno e Raízes Emocionais",
+        descricao: "Refere-se ao seu porto seguro. Para dominar o mundo lá fora, sua base interna precisa estar inabalável. cultive paz em seu espaço pessoal e proteja sua energia."
+      },
+      5: {
+        titulo: "PORTAL 05 (Autoria & Criatividade)",
+        subtitulo: "Brilho Pessoal, Paixão e Expressão Autêntica",
+        descricao: "O portal da criação e do prazer. É o setor onde você assume o palco da própria vida, lidera projetos autorais marcantes e atrai o amor através da pura autenticidade."
+      },
+      6: {
+        titulo: "PORTAL 06 (Alta Eficiência)",
+        subtitulo: "Ritmos de Performance e Cuidado com o Templo",
+        descricao: "Como você organiza sua rotina diária. A otimização de hábitos e a saúde do corpo físico são as alavancas para sustentar suas maiores ambições sem exaustão."
+      },
+      7: {
+        titulo: "PORTAL 07 (Alianças de Alto Valor)",
+        subtitulo: "Parcerias Estratégicas e Dinâmica Afetiva",
+        descricao: "O espelho do outro. Estabeleça critérios elevados para quem compartilha sua caminhada. Busque trocas onde exista reciprocidade, respeito e crescimento mútuo."
+      },
+      8: {
+        titulo: "PORTAL 08 (Reinventar & Alquimia)",
+        subtitulo: "Transmutação de Crises em Poder Pessoal",
+        descricao: "A capacidade de se regenerar diante dos ciclos de mudança. Domine a arte de desapegar do que não serve mais e emergir cada vez mais forte e estratégico."
+      },
+      9: {
+        titulo: "PORTAL 09 (Expansão de Fronteiras)",
+        subtitulo: "Visão de Longo Alcance e Sabedoria Superior",
+        descricao: "O desejo de buscar horizontes mais amplos. Planeje grandes passos profissionais, viagens, estudos e a consolidação de uma filosofia de vida autônoma."
+      },
+      10: {
+        titulo: "PORTAL 10 (Apogeu & Reconhecimento)",
+        subtitulo: "Reputação, Liderança e Marca no Mundo",
+        descricao: "A casa do topo do mapa. Aqui se desenha a sua reputação pública. Posicione-se como referência no seu nicho e colha os frutos do trabalho consistente."
+      },
+      11: {
+        titulo: "PORTAL 11 (Rede de Influência)",
+        subtitulo: "Círculo Social Estratégico e Grandes Projetos",
+        descricao: "O valor dos seus ecossistemas. Conecte-se com pessoas visionárias que compartilham de seus propósitos e amplifiquem seu impacto na comunidade."
+      },
+      12: {
+        titulo: "PORTAL 12 (Intuição & Sabedoria)",
+        subtitulo: "Percepção dos Bastidores e Conexão Espiritual",
+        descricao: "O portal da escuta interna. Aprenda a decodificar os sinais e sutilezas dos ambientes para antecipar movimentos e tomar decisões com profunda sabedoria."
+      }
     };
 
-    function showPortalGuide(portalNumber) {
-      const box = document.getElementById('house-detail-box');
-      box.innerHTML = `<span class="font-bold text-cosmic-gold block mb-1 font-serif text-sm">DIRETRIZ DO PORTAL ${portalNumber}</span>${portalGuides[portalNumber]}`;
+    /* RESPOSTAS SIMULADAS DO ORÁCULO EM CHAT */
+    const chatResponses = [
+      "A iluminação da sua Vênus sugere um momento onde sua presença desperta fascínio natural. A chave é manter a calma e deixar que o outro venha até o seu centro.",
+      "Identifico um trânsito favorável para decisões de carreira nas próximas semanas. É hora de solicitar o espaço e o valor que você verdadeiramente merece.",
+      "O ponto cego atual envolve tentar controlar o tempo dos acontecimentos. Lembre-se: quando seu eixo interno se firma, as circunstâncias externas se alinham em resposta.",
+      "Sua intuição está aguçada neste ciclo. Confie nas primeiras impressões que tiver em reuniões ou encontros sociais recentes."
+    ];
+    let chatIndex = 0;
+
+    /* ALTERNÂNCIA DE MODO VIBRACIONAL */
+    function switchMode(modo) {
+      const btnSer = document.getElementById('btn-mode-ser');
+      const btnPista = document.getElementById('btn-mode-pista');
+      
+      if (modo === 'ser') {
+        btnSer.className = "px-5 py-2.5 rounded-xl font-serif text-xs font-bold transition-all duration-300 flex items-center gap-2 bg-astral-card text-astral-indigo shadow-md border border-astral-gold/30";
+        btnPista.className = "px-5 py-2.5 rounded-xl font-serif text-xs font-bold transition-all duration-300 flex items-center gap-2 text-astral-subtext hover:text-astral-indigo";
+        
+        document.getElementById('mandala-signo-principal').innerText = "SOL EM TOURO";
+        document.getElementById('mandala-ascendente').innerText = "ASC. ESCORPIÃO";
+        document.getElementById('selo-narrativa-text').innerText = "Suas coordenadas natas no Santuário do Ser apontam para um período de ancoragem interna, escuta intuitiva e fortaleça de princípios essenciais.";
+      } else {
+        btnPista.className = "px-5 py-2.5 rounded-xl font-serif text-xs font-bold transition-all duration-300 flex items-center gap-2 bg-astral-card text-astral-indigo shadow-md border border-astral-gold/30";
+        btnSer.className = "px-5 py-2.5 rounded-xl font-serif text-xs font-bold transition-all duration-300 flex items-center gap-2 text-astral-subtext hover:text-astral-indigo";
+        
+        document.getElementById('mandala-signo-principal').innerText = "MODO AÇÃO / PISTA";
+        document.getElementById('mandala-ascendente').innerText = "MAGNETISMO ATIVO";
+        document.getElementById('selo-narrativa-text').innerText = "Na frequência de Ação & Presença Social, suas coordenadas ativam uma janela de oportunidade para fechar acordos de alto valor e projetar liderança em seu ecossistema.";
+      }
     }
 
-    function activateCommand() {
-      const analysisBox = document.getElementById('analysis-text');
-      analysisBox.innerText = "Coordenadas calibradas com sucesso. Sua bússola indica um ciclo de forte clareza estratégica. O momento é ideal para consolidar sua autoridade nos negócios e estabelecer limites claros para transitar com elegância em qualquer grupo.";
+    /* SELEÇÃO E EXIBIÇÃO DOS PORTAIS */
+    function selecionarPortal(numero) {
+      const data = portalData[numero];
+      const detailBox = document.getElementById('portal-detail-box');
+      
+      detailBox.innerHTML = `
+        <div class="animate-fade-in space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-serif font-bold text-astral-indigo text-sm">${data.titulo}</span>
+            <span class="text-[9px] text-astral-accent font-mono bg-astral-gold/15 px-2 py-0.5 rounded-full">ATIVADO</span>
+          </div>
+          <span class="block text-[11px] font-semibold text-astral-purple">${data.subtitulo}</span>
+          <p class="text-xs text-astral-subtext leading-relaxed pt-1">${data.descricao}</p>
+        </div>
+      `;
     }
 
-    function runSocialMapping() {
-      alert("Mapeamento de convivência gerado com sucesso. Acesse as diretrizes de relacionamento em seu painel privado.");
+    /* SUBMISSÃO DE PERGUNTAS NO CHAT DO ORÁCULO */
+    function handleChatSubmit() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendUserMessage(text);
+      input.value = '';
+
+      // Simula tempo de reflexão do Oráculo
+      setTimeout(() => {
+        const responseText = chatResponses[chatIndex % chatResponses.length];
+        chatIndex++;
+        appendOracleMessage(responseText);
+      }, 900);
     }
 
-    function unlockDossier() {
-      alert("Redirecionando para a liberação do seu Dossiê Completo de Expansão.");
+    function sendQuickPrompt(promptText) {
+      appendUserMessage(promptText);
+      setTimeout(() => {
+        const responseText = chatResponses[chatIndex % chatResponses.length];
+        chatIndex++;
+        appendOracleMessage(responseText);
+      }, 800);
+    }
+
+    function appendUserMessage(text) {
+      const container = document.getElementById('chat-messages');
+      const msgHTML = `
+        <div class="flex gap-2 items-start justify-end">
+          <div class="bg-astral-indigo text-white p-3 rounded-2xl rounded-tr-none text-xs shadow-sm max-w-[85%]">
+            <p>${text}</p>
+          </div>
+        </div>
+      `;
+      container.innerHTML += msgHTML;
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function appendOracleMessage(text) {
+      const container = document.getElementById('chat-messages');
+      const msgHTML = `
+        <div class="flex gap-2 items-start animate-fade-in">
+          <div class="w-6 h-6 rounded-full bg-astral-surface border border-astral-gold/40 flex-shrink-0 flex items-center justify-center text-[10px] text-astral-accent font-serif">
+            ✦
+          </div>
+          <div class="bg-astral-surface/90 border border-astral-border p-3 rounded-2xl rounded-tl-none text-astral-text shadow-sm">
+            <p class="font-semibold text-astral-indigo mb-1 text-[11px]">Oráculo Revela:</p>
+            <p>${text}</p>
+          </div>
+        </div>
+      `;
+      container.innerHTML += msgHTML;
+      container.scrollTop = container.scrollHeight;
+    }
+
+    /* CALIBRAR FREQUÊNCIA DE INICIAÇÃO */
+    function calibrarFrequencia() {
+      const nome = document.getElementById('input-nome').value;
+      const cidade = document.getElementById('input-cidade').value;
+
+      document.getElementById('selo-narrativa-text').innerText = 
+        `Frequência calibrada para ${nome} (${cidade}). Identificamos um alinhamento crítico no regente do seu Ascendente. Seu momento pede clareza de foco para potencializar suas decisões nos próximos 90 dias.`;
+
+      appendOracleMessage(`Coordenadas de ${nome} recebidas com sucesso. Sua frequência natal foi sincronizada com a mandala em tempo real.`);
+    }
+
+    /* SINASTRIA / RESSONÂNCIA */
+    function calcularRessonancia() {
+      const nome = document.getElementById('res-nome').value;
+      const box = document.getElementById('ressonancia-result');
+      
+      document.getElementById('res-titulo').innerText = `Ressonância com ${nome}`;
+      document.getElementById('res-porcentagem').innerText = "92%";
+      document.getElementById('res-descricao').innerText = 
+        `Excelente alinhamento arquetípico. A combinação indica forte magnetismo interpessoal, facilidade para acordos estratégicos e fluidez de comunicação.`;
+      
+      box.classList.remove('hidden');
+    }
+
+    /* MODAIS: CHECKOUT & VAULT */
+    function openCheckoutModal() {
+      const modal = document.getElementById('modal-checkout');
+      const box = document.getElementById('checkout-box');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      box.classList.remove('scale-95');
+    }
+
+    function closeCheckoutModal() {
+      const modal = document.getElementById('modal-checkout');
+      const box = document.getElementById('checkout-box');
+      box.classList.add('scale-95');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    function openVaultModal() {
+      const modal = document.getElementById('modal-vault');
+      const box = document.getElementById('vault-box');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      box.classList.remove('scale-95');
+    }
+
+    function closeVaultModal() {
+      const modal = document.getElementById('modal-vault');
+      const box = document.getElementById('vault-box');
+      box.classList.add('scale-95');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    function switchPaymentTab(tab) {
+      const pixBtn = document.getElementById('tab-pix');
+      const cardBtn = document.getElementById('tab-card');
+      const pixContent = document.getElementById('content-pix');
+      const cardContent = document.getElementById('content-card');
+
+      if (tab === 'pix') {
+        pixBtn.className = "flex-1 py-1.5 text-xs font-semibold rounded-lg bg-astral-card text-astral-indigo shadow-sm transition-all";
+        cardBtn.className = "flex-1 py-1.5 text-xs font-semibold rounded-lg text-astral-subtext transition-all";
+        pixContent.classList.remove('hidden');
+        cardContent.classList.add('hidden');
+      } else {
+        cardBtn.className = "flex-1 py-1.5 text-xs font-semibold rounded-lg bg-astral-card text-astral-indigo shadow-sm transition-all";
+        pixBtn.className = "flex-1 py-1.5 text-xs font-semibold rounded-lg text-astral-subtext transition-all";
+        cardContent.classList.remove('hidden');
+        pixContent.classList.add('hidden');
+      }
+    }
+
+    function copyPixCode() {
+      const text = "00020126580014BR.GOV.BCB.PIX0136bussola-astral-selo-sabedoria-2026";
+      document.execCommand('copy');
+      alert('Código Pix copiado para a área de transferência com sucesso!');
+    }
+
+    function simularAprovacaoPagamento() {
+      closeCheckoutModal();
+      setTimeout(() => {
+        openVaultModal();
+      }, 400);
+    }
+
+    function resetToHome() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 </body>
